@@ -58,7 +58,7 @@ var fetchAPIData = function () { return __awaiter(_this, void 0, void 0, functio
             case 3:
                 error_1 = _a.sent();
                 if (error_1 instanceof Error) {
-                    main.innerHTML = "<p>".concat("something went wrong" + error_1.message, "</p>");
+                    main.textContent = "".concat("something went wrong" + error_1.message);
                 }
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/, null];
@@ -79,8 +79,10 @@ var createData = function (data) {
 var renderElement = function () {
     try {
         var countriesContainer_1 = document.createElement("div");
+        countriesContainer_1.className = "item-container";
         var countries = countriesData.map(function (v) {
             var item = document.createElement("div");
+            item.className = "item";
             var flagElement = createFlagImage(v.flags.png, v.flags.alt);
             var name = createData(v.name.common);
             var population = createData(v.population.toString());
@@ -95,8 +97,9 @@ var renderElement = function () {
         main.appendChild(countriesContainer_1);
     }
     catch (error) {
-        if (error instanceof Error)
-            main.innerHTML = "<p>".concat(error.message, "</p>");
+        if (error instanceof Error) {
+            main.textContent = "".concat("something went wrong" + error.message);
+        }
     }
 };
 window.addEventListener("load", function () { return __awaiter(_this, void 0, void 0, function () {

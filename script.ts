@@ -35,7 +35,7 @@ const fetchAPIData = async () => {
     countriesData = data;
   } catch (error) {
     if (error instanceof Error) {
-      main.innerHTML = `<p>${"something went wrong" + error.message}</p>`;
+      main.textContent = `${"something went wrong" + error.message}`;
     }
   }
   return null;
@@ -57,9 +57,11 @@ const createData = (data: string) => {
 const renderElement = () => {
   try {
     const countriesContainer = document.createElement("div");
+    countriesContainer.className = "item-container";
 
     const countries = countriesData.map((v) => {
       const item = document.createElement("div");
+      item.className = "item";
 
       const flagElement = createFlagImage(v.flags.png, v.flags.alt);
       const name = createData(v.name.common);
@@ -75,9 +77,12 @@ const renderElement = () => {
     });
     main.appendChild(countriesContainer);
   } catch (error) {
-    if (error instanceof Error) main.innerHTML = `<p>${error.message}</p>`;
+    if (error instanceof Error) {
+      main.textContent = `${"something went wrong" + error.message}`;
+    }
   }
 };
+
 window.addEventListener("load", async () => {
   await fetchAPIData();
   renderElement();

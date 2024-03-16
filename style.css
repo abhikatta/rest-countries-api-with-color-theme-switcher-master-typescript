@@ -1,0 +1,25 @@
+body .main {
+  font-family: "Nunito Sans";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main .item-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.main .item-container .item {
+  background-color: palegreen;
+  height: 100%;
+}
+.main .item-container .item p {
+  padding-left: 1rem;
+}
+.main .item-container .item img {
+  width: 100%;
+
+  height: auto;
+}
