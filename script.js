@@ -37,6 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 // elements
 var main = document.getElementById("main");
+var countriesContainer = document.getElementById("item-container");
+var searchElement = document.getElementById("search");
 // API endpoint
 var API_ENDPOINT = "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,nativeName";
 // data
@@ -78,8 +80,6 @@ var createData = function (data) {
 };
 var renderElement = function () {
     try {
-        var countriesContainer_1 = document.createElement("div");
-        countriesContainer_1.className = "item-container";
         var countries = countriesData.map(function (v) {
             var item = document.createElement("div");
             item.className = "item";
@@ -92,15 +92,20 @@ var renderElement = function () {
             return item;
         });
         countries.map(function (country) {
-            countriesContainer_1.append(country);
+            countriesContainer.append(country);
         });
-        main.appendChild(countriesContainer_1);
     }
     catch (error) {
         if (error instanceof Error) {
             main.textContent = "".concat("something went wrong" + error.message);
         }
     }
+};
+var search = function () {
+    console.log(searchElement.value);
+};
+var toggleDarkMode = function () {
+    console.log("Dark mode pressed");
 };
 window.addEventListener("load", function () { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {

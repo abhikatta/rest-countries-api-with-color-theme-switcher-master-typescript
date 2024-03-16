@@ -10,7 +10,24 @@
     <title>Task3</title>
   </head>
   <body>
-    <div id="main" class="main"></div>
+    <nav>
+      <h2>Where in the World?</h2>
+      <button
+        id="darkMode-button"
+        onclick="toggleDarkMode()"
+        class="darkMode-button">
+        Dark Mode
+      </button>
+    </nav>
+    <div id="main" class="main">
+      <input
+        type="search"
+        oninput="search()"
+        id="search"
+        class="search"
+        placeholder="Search for a country..." />
+    </div>
+    <div id="item-container" class="item-container"></div>
   </body>
   <script src="./script.js" defer></script>
 </html>

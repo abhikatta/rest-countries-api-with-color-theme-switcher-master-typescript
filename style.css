@@ -4,21 +4,27 @@ body .main {
   align-items: center;
   justify-content: center;
 }
-.main .item-container {
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2rem 15rem;
+}
+.item-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: center;
   gap: 2rem;
 }
-.main .item-container .item {
+.item-container .item {
   background-color: palegreen;
   height: 100%;
 }
-.main .item-container .item p {
+.item-container .item p {
   padding-left: 1rem;
 }
-.main .item-container .item img {
+.item-container .item img {
   width: 100%;
 
   height: auto;

@@ -21,6 +21,11 @@ interface CountryData {
 
 // elements
 const main = document.getElementById("main") as HTMLElement;
+const countriesContainer = document.getElementById(
+  "item-container"
+) as HTMLElement;
+
+const searchElement = document.getElementById("search") as HTMLInputElement;
 
 // API endpoint
 const API_ENDPOINT =
@@ -41,14 +46,14 @@ const fetchAPIData = async () => {
   return null;
 };
 
-const createFlagImage = (url: string, alt: string) => {
+const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   const flagElement = document.createElement("img");
   flagElement.src = url;
   flagElement.alt = alt;
   return flagElement;
 };
 
-const createData = (data: string) => {
+const createData = (data: string): HTMLParagraphElement => {
   const dataElement = document.createElement("p");
   dataElement.textContent = data;
   return dataElement;
@@ -56,9 +61,6 @@ const createData = (data: string) => {
 
 const renderElement = () => {
   try {
-    const countriesContainer = document.createElement("div");
-    countriesContainer.className = "item-container";
-
     const countries = countriesData.map((v) => {
       const item = document.createElement("div");
       item.className = "item";
@@ -75,7 +77,6 @@ const renderElement = () => {
     countries.map((country) => {
       countriesContainer.append(country);
     });
-    main.appendChild(countriesContainer);
   } catch (error) {
     if (error instanceof Error) {
       main.textContent = `${"something went wrong" + error.message}`;
@@ -83,6 +84,12 @@ const renderElement = () => {
   }
 };
 
+const search = () => {
+  console.log(searchElement.value);
+};
+const toggleDarkMode = () => {
+  console.log("Dark mode pressed");
+};
 window.addEventListener("load", async () => {
   await fetchAPIData();
   renderElement();
