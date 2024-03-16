@@ -108,20 +108,17 @@ var renderElement = function () {
 var search = function () {
     var searchValue = searchElement.value;
     if (searchValue) {
-        console.log(searchValue + " this is changed");
         duplicateCountriesData = countriesData.filter(function (country) {
             return country.name.common
                 .toLowerCase()
                 .trim()
                 .includes(searchValue.toLowerCase().trim());
         });
-        renderElement();
-        console.log(duplicateCountriesData);
     }
     else {
         duplicateCountriesData = countriesData;
     }
-    console.log("renderelemetn ran");
+    renderElement();
     return null;
 };
 var toggleDarkMode = function () {

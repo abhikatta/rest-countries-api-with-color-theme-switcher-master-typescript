@@ -1,42 +1,53 @@
 * {
   font-family: "Nunito Sans";
 }
-body .main {
+body {
+  margin: 0 10rem;
+  padding: 0;
+}
+.main {
   font-family: "Nunito Sans";
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 2rem 10rem;
+  margin: 2rem 0rem;
 }
 nav {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 2rem 15rem;
 }
-nav .darkMode-button {
+.darkMode-button {
   height: min-content;
 }
 .item-container {
   display: grid;
-  margin: 0rem 4rem;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: center;
   gap: 2rem;
 }
-.item-container .item {
+.item {
   height: 100%;
+  background-color: white;
+  transition: 0.4s;
 }
-.item-container .item p {
+.item:hover {
+  cursor: pointer;
+  transform: scale(110%);
+
+  animation-duration: 0.4s;
+}
+.item p {
   padding-left: 2rem;
 }
-.item-container .item img {
+.item img {
   width: 100%;
   height: auto;
 }
-.item-container .item .title {
+.item .title {
   font-size: 26px;
   font-weight: bolder;
 }

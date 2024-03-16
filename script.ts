@@ -24,7 +24,6 @@ const main = document.getElementById("main") as HTMLElement;
 const countriesContainer = document.getElementById(
   "item-container"
 ) as HTMLElement;
-
 const searchElement = document.getElementById("search") as HTMLInputElement;
 
 // API endpoint
@@ -77,7 +76,6 @@ const renderElement = () => {
         v.capital ? v.capital[0] : "Unknown",
         "Capital"
       );
-
       item.append(flagElement, name, population, region, capital);
       return item;
     });
@@ -95,20 +93,16 @@ const search = () => {
   const searchValue = searchElement.value;
 
   if (searchValue) {
-    console.log(searchValue + " this is changed");
     duplicateCountriesData = countriesData.filter((country) => {
       return country.name.common
         .toLowerCase()
         .trim()
         .includes(searchValue.toLowerCase().trim());
     });
-    renderElement();
-    console.log(duplicateCountriesData);
   } else {
     duplicateCountriesData = countriesData;
   }
-  console.log("renderelemetn ran");
-
+  renderElement();
   return null;
 };
 const toggleDarkMode = () => {
