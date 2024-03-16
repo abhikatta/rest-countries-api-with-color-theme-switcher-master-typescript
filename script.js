@@ -40,22 +40,24 @@ var main = document.getElementById("main");
 var countriesContainer = document.getElementById("item-container");
 var searchElement = document.getElementById("search");
 // API endpoint
-var API_ENDPOINT = "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,nativeName";
+var API_ENDPOINT = "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
 // data
 var countriesData;
+var duplicateCountriesData;
 var fetchAPIData = function () { return __awaiter(_this, void 0, void 0, function () {
     var res, data, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, fetch("https://restcountries.com/v3.1/all")];
+                return [4 /*yield*/, fetch(API_ENDPOINT)];
             case 1:
                 res = _a.sent();
                 return [4 /*yield*/, res.json()];
             case 2:
                 data = _a.sent();
-                countriesData = data;
+                countriesData = JSON.parse(JSON.stringify(data));
+                duplicateCountriesData = JSON.parse(JSON.stringify(countriesData));
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();
@@ -80,11 +82,12 @@ var createData = function (data) {
 };
 var renderElement = function () {
     try {
-        var countries = countriesData.map(function (v) {
+        var countries = duplicateCountriesData.map(function (v) {
             var item = document.createElement("div");
             item.className = "item";
             var flagElement = createFlagImage(v.flags.png, v.flags.alt);
             var name = createData(v.name.common);
+            name.className = "title";
             var population = createData(v.population.toString());
             var region = createData(v.region);
             var capital = createData(v.capital ? v.capital[0] : "Unknown");
@@ -102,7 +105,21 @@ var renderElement = function () {
     }
 };
 var search = function () {
-    console.log(searchElement.value);
+    var searchValue = searchElement.value;
+    if (searchValue.length > 0) {
+        console.log(searchValue + " this is changed");
+        duplicateCountriesData = duplicateCountriesData.filter(function (country) {
+            return country.name.common
+                .toLowerCase()
+                .trim()
+                .includes(searchValue.toLowerCase().trim());
+        });
+    }
+    else {
+        duplicateCountriesData = countriesData;
+    }
+    renderElement();
+    return null;
 };
 var toggleDarkMode = function () {
     console.log("Dark mode pressed");
@@ -118,3 +135,4 @@ window.addEventListener("load", function () { return __awaiter(_this, void 0, vo
         }
     });
 }); });
+//# sourceMappingURL=script.js.map

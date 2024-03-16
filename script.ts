@@ -29,15 +29,17 @@ const searchElement = document.getElementById("search") as HTMLInputElement;
 
 // API endpoint
 const API_ENDPOINT =
-  "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,nativeName";
+  "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
 
 // data
 let countriesData: CountryData[];
+let duplicateCountriesData: CountryData[];
 const fetchAPIData = async () => {
   try {
-    const res = await fetch("https://restcountries.com/v3.1/all");
+    const res = await fetch(API_ENDPOINT);
     const data = await res.json();
-    countriesData = data;
+    countriesData = JSON.parse(JSON.stringify(data));
+    duplicateCountriesData = JSON.parse(JSON.stringify(countriesData));
   } catch (error) {
     if (error instanceof Error) {
       main.textContent = `${"something went wrong" + error.message}`;
@@ -61,12 +63,13 @@ const createData = (data: string): HTMLParagraphElement => {
 
 const renderElement = () => {
   try {
-    const countries = countriesData.map((v) => {
+    const countries = duplicateCountriesData.map((v) => {
       const item = document.createElement("div");
       item.className = "item";
 
       const flagElement = createFlagImage(v.flags.png, v.flags.alt);
       const name = createData(v.name.common);
+      name.className = "title";
       const population = createData(v.population.toString());
       const region = createData(v.region);
       const capital = createData(v.capital ? v.capital[0] : "Unknown");
@@ -85,7 +88,22 @@ const renderElement = () => {
 };
 
 const search = () => {
-  console.log(searchElement.value);
+  const searchValue = searchElement.value;
+
+  if (searchValue.length > 0) {
+    console.log(searchValue + " this is changed");
+    duplicateCountriesData = duplicateCountriesData.filter((country) => {
+      return country.name.common
+        .toLowerCase()
+        .trim()
+        .includes(searchValue.toLowerCase().trim());
+    });
+  } else {
+    duplicateCountriesData = countriesData;
+  }
+  renderElement();
+
+  return null;
 };
 const toggleDarkMode = () => {
   console.log("Dark mode pressed");
