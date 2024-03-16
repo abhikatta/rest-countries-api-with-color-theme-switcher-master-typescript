@@ -65,11 +65,34 @@ var fetchAPIData = function () { return __awaiter(_this, void 0, void 0, functio
         }
     });
 }); };
+var createFlagImage = function (url, alt) {
+    var flagElement = document.createElement("img");
+    flagElement.src = url;
+    flagElement.alt = alt;
+    return flagElement;
+};
+var createData = function (data) {
+    var dataElement = document.createElement("p");
+    dataElement.textContent = data;
+    return dataElement;
+};
 var renderElement = function () {
     try {
-        countriesData.forEach(function (v) {
-            main.innerHTML += "<p>".concat(v.name.common, "</p>");
+        var countriesContainer_1 = document.createElement("div");
+        var countries = countriesData.map(function (v) {
+            var item = document.createElement("div");
+            var flagElement = createFlagImage(v.flags.png, v.flags.alt);
+            var name = createData(v.name.common);
+            var population = createData(v.population.toString());
+            var region = createData(v.region);
+            var capital = createData(v.capital ? v.capital[0] : "Unknown");
+            item.append(flagElement, name, population, region, capital);
+            return item;
         });
+        countries.map(function (country) {
+            countriesContainer_1.append(country);
+        });
+        main.appendChild(countriesContainer_1);
     }
     catch (error) {
         if (error instanceof Error)
