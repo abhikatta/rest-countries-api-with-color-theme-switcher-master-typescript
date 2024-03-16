@@ -1,14 +1,22 @@
+* {
+  font-family: "Nunito Sans";
+}
 body .main {
   font-family: "Nunito Sans";
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 2rem 10rem;
 }
 nav {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   margin: 2rem 15rem;
+}
+nav .darkMode-button {
+  height: min-content;
 }
 .item-container {
   display: grid;
