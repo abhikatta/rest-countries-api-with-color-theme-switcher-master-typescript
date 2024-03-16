@@ -39,6 +39,7 @@ var _this = this;
 var main = document.getElementById("main");
 var countriesContainer = document.getElementById("item-container");
 var searchElement = document.getElementById("search");
+var filterElement = document.getElementById("filter");
 // API endpoint
 var API_ENDPOINT = "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
 // data
@@ -81,8 +82,37 @@ var createData = function (data, title) {
     return dataElement;
 };
 var renderElement = function () {
+    var searchValue = searchElement.value;
+    var filterValue = filterElement.value;
+    console.log("renderstart");
     try {
         countriesContainer.replaceChildren();
+        if (searchValue) {
+            duplicateCountriesData = countriesData.filter(function (country) {
+                return country.name.common
+                    .toLowerCase()
+                    .trim()
+                    .includes(searchValue.toLowerCase().trim());
+            });
+            console.log("search if ");
+        }
+        else if (!searchValue) {
+            console.log("search else ");
+            duplicateCountriesData = countriesData;
+        }
+        if (filterValue && filterValue !== "Filter by Region") {
+            console.log("filter if ");
+            duplicateCountriesData = duplicateCountriesData.filter(function (country) {
+                return country.region
+                    .toLowerCase()
+                    .trim()
+                    .includes(filterValue.trim().toLowerCase());
+            });
+        }
+        else if (!filterValue) {
+            console.log("filter else");
+            duplicateCountriesData = countriesData;
+        }
         var countries = duplicateCountriesData.map(function (v) {
             var item = document.createElement("div");
             item.className = "item";
@@ -108,7 +138,7 @@ var renderElement = function () {
 var search = function () {
     var searchValue = searchElement.value;
     if (searchValue) {
-        duplicateCountriesData = countriesData.filter(function (country) {
+        duplicateCountriesData = duplicateCountriesData.filter(function (country) {
             return country.name.common
                 .toLowerCase()
                 .trim()
@@ -120,6 +150,25 @@ var search = function () {
     }
     renderElement();
     return null;
+};
+var filter = function () {
+    var filterValue = filterElement.value;
+    if (filterValue) {
+        duplicateCountriesData = duplicateCountriesData.filter(function (country) {
+            return country.region
+                .toLowerCase()
+                .trim()
+                .includes(filterValue.trim().toLowerCase());
+        });
+        renderElement();
+    }
+    else {
+        duplicateCountriesData = countriesData;
+    }
+};
+var removeFilter = function () {
+    filterElement.value = "Filter by Region";
+    renderElement();
 };
 var toggleDarkMode = function () {
     console.log("Dark mode pressed");

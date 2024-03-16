@@ -22,18 +22,21 @@
     <div id="main" class="main">
       <input
         type="search"
-        oninput="search()"
         id="search"
         class="search"
+        oninput="search()"
         placeholder="Search for a country..." />
-      <select>
-        <option hidden>Filter by Region</option>
-        <option>Africa</option>
-        <option>America</option>
-        <option>Asia</option>
-        <option>Europe</option>
-        <option>Oceania</option>
-      </select>
+      <div>
+        <select id="filter" oninput="filter()">
+          <option hidden>Filter by Region</option>
+          <option>Africa</option>
+          <option>Americas</option>
+          <option>Asia</option>
+          <option>Europe</option>
+          <option>Oceania</option>
+        </select>
+        <button onclick="removeFilter()">x</button>
+      </div>
     </div>
     <div id="item-container" class="item-container"></div>
   </body>

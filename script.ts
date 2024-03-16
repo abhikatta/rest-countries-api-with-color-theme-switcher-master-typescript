@@ -25,6 +25,7 @@ const countriesContainer = document.getElementById(
   "item-container"
 ) as HTMLElement;
 const searchElement = document.getElementById("search") as HTMLInputElement;
+const filterElement = document.getElementById("filter") as HTMLInputElement;
 
 // API endpoint
 const API_ENDPOINT =
@@ -61,8 +62,40 @@ const createData = (data: string, title?: string): HTMLParagraphElement => {
 };
 
 const renderElement = () => {
+  const searchValue = searchElement.value;
+  const filterValue = filterElement.value;
+  console.log("renderstart");
+
   try {
     countriesContainer.replaceChildren();
+    if (searchValue) {
+      duplicateCountriesData = countriesData.filter((country) => {
+        return country.name.common
+          .toLowerCase()
+          .trim()
+          .includes(searchValue.toLowerCase().trim());
+      });
+      console.log("search if ");
+    } else if (!searchValue) {
+      console.log("search else ");
+
+      duplicateCountriesData = countriesData;
+    }
+    if (filterValue && filterValue !== "Filter by Region") {
+      console.log("filter if ");
+
+      duplicateCountriesData = duplicateCountriesData.filter((country) => {
+        return country.region
+          .toLowerCase()
+          .trim()
+          .includes(filterValue.trim().toLowerCase());
+      });
+    } else if (!filterValue) {
+      console.log("filter else");
+
+      duplicateCountriesData = countriesData;
+    }
+
     const countries = duplicateCountriesData.map((v) => {
       const item = document.createElement("div");
       item.className = "item";
@@ -93,7 +126,7 @@ const search = () => {
   const searchValue = searchElement.value;
 
   if (searchValue) {
-    duplicateCountriesData = countriesData.filter((country) => {
+    duplicateCountriesData = duplicateCountriesData.filter((country) => {
       return country.name.common
         .toLowerCase()
         .trim()
@@ -104,6 +137,25 @@ const search = () => {
   }
   renderElement();
   return null;
+};
+
+const filter = () => {
+  const filterValue = filterElement.value;
+  if (filterValue) {
+    duplicateCountriesData = duplicateCountriesData.filter((country) => {
+      return country.region
+        .toLowerCase()
+        .trim()
+        .includes(filterValue.trim().toLowerCase());
+    });
+    renderElement();
+  } else {
+    duplicateCountriesData = countriesData;
+  }
+};
+const removeFilter = () => {
+  filterElement.value = "Filter by Region";
+  renderElement();
 };
 const toggleDarkMode = () => {
   console.log("Dark mode pressed");
