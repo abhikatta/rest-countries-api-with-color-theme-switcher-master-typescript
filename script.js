@@ -75,22 +75,23 @@ var createFlagImage = function (url, alt) {
     flagElement.alt = alt;
     return flagElement;
 };
-var createData = function (data) {
+var createData = function (data, title) {
     var dataElement = document.createElement("p");
-    dataElement.textContent = data;
+    dataElement.textContent = title ? title + ": " + data : data;
     return dataElement;
 };
 var renderElement = function () {
     try {
+        countriesContainer.replaceChildren();
         var countries = duplicateCountriesData.map(function (v) {
             var item = document.createElement("div");
             item.className = "item";
             var flagElement = createFlagImage(v.flags.png, v.flags.alt);
             var name = createData(v.name.common);
             name.className = "title";
-            var population = createData(v.population.toString());
-            var region = createData(v.region);
-            var capital = createData(v.capital ? v.capital[0] : "Unknown");
+            var population = createData(v.population.toString(), "Population");
+            var region = createData(v.region, "Region");
+            var capital = createData(v.capital ? v.capital[0] : "Unknown", "Capital");
             item.append(flagElement, name, population, region, capital);
             return item;
         });
@@ -106,19 +107,21 @@ var renderElement = function () {
 };
 var search = function () {
     var searchValue = searchElement.value;
-    if (searchValue.length > 0) {
+    if (searchValue) {
         console.log(searchValue + " this is changed");
-        duplicateCountriesData = duplicateCountriesData.filter(function (country) {
+        duplicateCountriesData = countriesData.filter(function (country) {
             return country.name.common
                 .toLowerCase()
                 .trim()
                 .includes(searchValue.toLowerCase().trim());
         });
+        renderElement();
+        console.log(duplicateCountriesData);
     }
     else {
         duplicateCountriesData = countriesData;
     }
-    renderElement();
+    console.log("renderelemetn ran");
     return null;
 };
 var toggleDarkMode = function () {

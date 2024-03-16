@@ -55,14 +55,15 @@ const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   return flagElement;
 };
 
-const createData = (data: string): HTMLParagraphElement => {
+const createData = (data: string, title?: string): HTMLParagraphElement => {
   const dataElement = document.createElement("p");
-  dataElement.textContent = data;
+  dataElement.textContent = title ? title + ": " + data : data;
   return dataElement;
 };
 
 const renderElement = () => {
   try {
+    countriesContainer.replaceChildren();
     const countries = duplicateCountriesData.map((v) => {
       const item = document.createElement("div");
       item.className = "item";
@@ -70,9 +71,12 @@ const renderElement = () => {
       const flagElement = createFlagImage(v.flags.png, v.flags.alt);
       const name = createData(v.name.common);
       name.className = "title";
-      const population = createData(v.population.toString());
-      const region = createData(v.region);
-      const capital = createData(v.capital ? v.capital[0] : "Unknown");
+      const population = createData(v.population.toString(), "Population");
+      const region = createData(v.region, "Region");
+      const capital = createData(
+        v.capital ? v.capital[0] : "Unknown",
+        "Capital"
+      );
 
       item.append(flagElement, name, population, region, capital);
       return item;
@@ -90,18 +94,20 @@ const renderElement = () => {
 const search = () => {
   const searchValue = searchElement.value;
 
-  if (searchValue.length > 0) {
+  if (searchValue) {
     console.log(searchValue + " this is changed");
-    duplicateCountriesData = duplicateCountriesData.filter((country) => {
+    duplicateCountriesData = countriesData.filter((country) => {
       return country.name.common
         .toLowerCase()
         .trim()
         .includes(searchValue.toLowerCase().trim());
     });
+    renderElement();
+    console.log(duplicateCountriesData);
   } else {
     duplicateCountriesData = countriesData;
   }
-  renderElement();
+  console.log("renderelemetn ran");
 
   return null;
 };

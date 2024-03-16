@@ -20,20 +20,23 @@ nav .darkMode-button {
 }
 .item-container {
   display: grid;
+  margin: 0rem 4rem;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: center;
   gap: 2rem;
 }
 .item-container .item {
-  background-color: palegreen;
   height: 100%;
 }
 .item-container .item p {
-  padding-left: 1rem;
+  padding-left: 2rem;
 }
 .item-container .item img {
   width: 100%;
-
   height: auto;
+}
+.item-container .item .title {
+  font-size: 26px;
+  font-weight: bolder;
 }
