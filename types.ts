@@ -34,6 +34,7 @@ interface DetailedData extends CountryData {
   };
   tld: string[];
   subregion: string;
+  borders: string[];
 }
 
 export { CountryData, DetailedData, LookUpData };

@@ -44,7 +44,14 @@ const createData = (data: string, title?: string): HTMLParagraphElement => {
   dataElement.textContent = title ? title + ": " + data : data;
   return dataElement;
 };
-
+const borderCountryLookup = (v: string) => {
+  const country = lookUpData.find((item) => {
+    return item.cca3 === v;
+  });
+  if (country) {
+    return country.name.common;
+  } else return null;
+};
 const renderDetailedElement = () => {
   const detailedCountry = detailedCountryData.map((v) => {
     const div = document.createElement("div");
@@ -67,21 +74,39 @@ const renderDetailedElement = () => {
       v.population.toString() || "Unknown",
       "Population"
     );
+
     const topLevelDomains = document.createElement("p");
     topLevelDomains.textContent += "Top Level Domains: ";
     v.tld.map((v) => (topLevelDomains.textContent += v + ", "));
+
     const currencies = document.createElement("p");
     currencies.textContent += "Currencies: ";
     for (const key in v.currencies) {
       const element = v.currencies[key];
       currencies.textContent += element.name + ", ";
     }
+
     const languages = document.createElement("p");
     languages.textContent += "Languages: ";
     for (const key in v.languages) {
       const element = v.languages[key];
       languages.textContent += element + ", ";
     }
+    const borderCountriesContainer = document.createElement("div");
+    borderCountriesContainer.textContent = "Border Countries: ";
+
+    v.borders.map((border) => {
+      const borderCountry = document.createElement("p");
+      borderCountry.className = "border-country";
+      const borderCountryName = borderCountryLookup(border);
+      borderCountry.textContent += borderCountryName;
+      borderCountriesContainer.append(borderCountry);
+      borderCountry.addEventListener("click", () => {
+        const newUrl = `/detailed-info/country.html?country=${borderCountryName}`;
+        window.location.href = newUrl;
+      });
+    });
+
     div.append(
       image,
       name,
@@ -92,9 +117,9 @@ const renderDetailedElement = () => {
       subRegion,
       topLevelDomains,
       currencies,
-      languages
+      languages,
+      borderCountriesContainer
     );
-
     return div;
   });
   itemContainer.append(detailedCountry[0]);

@@ -51,6 +51,16 @@ const createData = (data, title) => {
     dataElement.textContent = title ? title + ": " + data : data;
     return dataElement;
 };
+const borderCountryLookup = (v) => {
+    const country = lookUpData.find((item) => {
+        return item.cca3 === v;
+    });
+    if (country) {
+        return country.name.common;
+    }
+    else
+        return null;
+};
 const renderDetailedElement = () => {
     const detailedCountry = detailedCountryData.map((v) => {
         const div = document.createElement("div");
@@ -81,7 +91,20 @@ const renderDetailedElement = () => {
             const element = v.languages[key];
             languages.textContent += element + ", ";
         }
-        div.append(image, name, nativeName, population, region, capital, subRegion, topLevelDomains, currencies, languages);
+        const borderCountriesContainer = document.createElement("div");
+        borderCountriesContainer.textContent = "Border Countries: ";
+        v.borders.map((border) => {
+            const borderCountry = document.createElement("p");
+            borderCountry.className = "border-country";
+            const borderCountryName = borderCountryLookup(border);
+            borderCountry.textContent += borderCountryName;
+            borderCountriesContainer.append(borderCountry);
+            borderCountry.addEventListener("click", () => {
+                const newUrl = `/detailed-info/country.html?country=${borderCountryName}`;
+                window.location.href = newUrl;
+            });
+        });
+        div.append(image, name, nativeName, population, region, capital, subRegion, topLevelDomains, currencies, languages, borderCountriesContainer);
         return div;
     });
     itemContainer.append(detailedCountry[0]);
