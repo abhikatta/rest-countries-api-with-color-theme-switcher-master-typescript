@@ -40,5 +40,12 @@
     </div>
     <div id="item-container" class="item-container"></div>
   </body>
+  <script>
+    /* fix for: exports not defined error; from:
+    https://stackoverflow.com/questions/43042889/typescript-referenceerror-exports-is-not-defined
+    */
+    var exports = {};
+  </script>
+
   <script src="./script.js" defer></script>
 </html>

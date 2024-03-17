@@ -1,24 +1,23 @@
-interface CountryData {
-  name: {
-    common: string;
-    official: string;
-    nativeName: {
-      [key: string]: string;
-    };
-  };
-  capital: string[] | null;
-  region: string;
-  languages: {
-    [key: string]: string;
-  };
-  population: number;
-  flags: {
-    png: string;
-    svg: string;
-    alt: string;
-  };
-}
-
+// export interface CountryData {
+//   name: {
+//     common: string;
+//     nativeName: {
+//       [key: string]: string;
+//     };
+//   };
+//   capital: string[] | null;
+//   region: string;
+//   languages: {
+//     [key: string]: string;
+//   };
+//   population: number;
+//   flags: {
+//     png: string;
+//     svg: string;
+//     alt: string;
+//   };
+// }
+import { CountryData } from "./types";
 // elements
 const main = document.getElementById("main") as HTMLElement;
 const countriesContainer = document.getElementById(
@@ -61,10 +60,13 @@ const createData = (data: string, title?: string): HTMLParagraphElement => {
   return dataElement;
 };
 
+const showDetailedinfo = (v: CountryData) => {
+  const newUrl = `/detailed-info/country.html?country=${v.name.common}`;
+  window.location.href = newUrl;
+};
 const renderElement = () => {
   const searchValue = searchElement.value;
   const filterValue = filterElement.value;
-  console.log("renderstart");
 
   try {
     countriesContainer.replaceChildren();
@@ -75,15 +77,10 @@ const renderElement = () => {
           .trim()
           .includes(searchValue.toLowerCase().trim());
       });
-      console.log("search if ");
     } else if (!searchValue) {
-      console.log("search else ");
-
       duplicateCountriesData = countriesData;
     }
     if (filterValue && filterValue !== "Filter by Region") {
-      console.log("filter if ");
-
       duplicateCountriesData = duplicateCountriesData.filter((country) => {
         return country.region
           .toLowerCase()
@@ -91,14 +88,13 @@ const renderElement = () => {
           .includes(filterValue.trim().toLowerCase());
       });
     } else if (!filterValue) {
-      console.log("filter else");
-
       duplicateCountriesData = countriesData;
     }
 
     const countries = duplicateCountriesData.map((v) => {
       const item = document.createElement("div");
       item.className = "item";
+      item.addEventListener("click", () => showDetailedinfo(v));
 
       const flagElement = createFlagImage(v.flags.png, v.flags.alt);
       const name = createData(v.name.common);

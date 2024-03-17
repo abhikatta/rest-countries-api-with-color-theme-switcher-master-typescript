@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+    </style>
+    <link rel="stylesheet" href="../../style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task3</title>
+  </head>
+  <body>
+    <nav>
+      <h2 onclick="window.location.href=window.location.origin">
+        Where in the World?
+      </h2>
+      <button
+        id="darkMode-button"
+        onclick="toggleDarkMode()"
+        class="darkMode-button">
+        Dark Mode
+      </button>
+    </nav>
+    <div id="detailed-item-container" class="detailed-item-container"></div>
+  </body>
+  <script>
+    /* fix for: exports not defined error; from:
+      https://stackoverflow.com/questions/43042889/typescript-referenceerror-exports-is-not-defined
+      */
+    var exports = {};
+  </script>
+  <script src="./script-detailed-info.js" defer></script>
+</html>
