@@ -27,7 +27,10 @@ interface LookUpData {
 interface DetailedData extends CountryData {
   cca3: string;
   currencies: {
-    [key: string]: string;
+    [key: string]: {
+      name: string;
+      symbol: string;
+    };
   };
   tld: string[];
   subregion: string;

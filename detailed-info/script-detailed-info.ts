@@ -31,10 +31,7 @@ const fetchDetailedData = async () => {
   }
   return null;
 };
-const showDetailedinfo = (v: CountryData) => {
-  const newUrl = `/detailed-info/country.html?country=${v.name.common}`;
-  window.location.href = newUrl;
-};
+
 const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   const flagElement = document.createElement("img");
   flagElement.src = url;
@@ -53,18 +50,50 @@ const renderDetailedElement = () => {
     const div = document.createElement("div");
 
     const image = createFlagImage(v.flags.png, v.flags.alt);
-    const name = createData(v.name.common);
+    const name = createData(v.name.common || "Unknown");
     const nativeName = document.createElement("p");
     nativeName.textContent = "Native Name: ";
     for (const key in v.name.nativeName) {
-      const element = v.name.nativeName[key].common;
+      const element = v.name.nativeName[key].common || "Unknown";
       nativeName.textContent += element + ", ";
     }
-    const region = createData(v.region, "Region");
-    const subRegion = createData(v.subregion, "Sub Region");
-    const population = createData(v.population.toString(), "Population");
-
-    div.append(image, name, nativeName, region, subRegion, population);
+    const region = createData(v.region || "Unknown", "Region");
+    const subRegion = createData(v.subregion || "Unknown", "Sub Region");
+    const capital = createData(
+      v.capital ? v.capital[0] : "Unknown",
+      "Capital "
+    );
+    const population = createData(
+      v.population.toString() || "Unknown",
+      "Population"
+    );
+    const topLevelDomains = document.createElement("p");
+    topLevelDomains.textContent += "Top Level Domains: ";
+    v.tld.map((v) => (topLevelDomains.textContent += v + ", "));
+    const currencies = document.createElement("p");
+    currencies.textContent += "Currencies: ";
+    for (const key in v.currencies) {
+      const element = v.currencies[key];
+      currencies.textContent += element.name + ", ";
+    }
+    const languages = document.createElement("p");
+    languages.textContent += "Languages: ";
+    for (const key in v.languages) {
+      const element = v.languages[key];
+      languages.textContent += element + ", ";
+    }
+    div.append(
+      image,
+      name,
+      nativeName,
+      population,
+      region,
+      capital,
+      subRegion,
+      topLevelDomains,
+      currencies,
+      languages
+    );
 
     return div;
   });
