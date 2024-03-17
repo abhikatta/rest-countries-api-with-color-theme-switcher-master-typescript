@@ -2,7 +2,7 @@ interface CountryData {
   name: {
     common: string;
     nativeName: {
-      [key: string]: string;
+      [key: string]: { common: string; official: string };
     };
   };
   capital: string[] | null;

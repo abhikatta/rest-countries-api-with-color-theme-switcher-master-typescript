@@ -1,22 +1,3 @@
-// export interface CountryData {
-//   name: {
-//     common: string;
-//     nativeName: {
-//       [key: string]: string;
-//     };
-//   };
-//   capital: string[] | null;
-//   region: string;
-//   languages: {
-//     [key: string]: string;
-//   };
-//   population: number;
-//   flags: {
-//     png: string;
-//     svg: string;
-//     alt: string;
-//   };
-// }
 import { CountryData } from "./types";
 // elements
 const main = document.getElementById("main") as HTMLElement;
