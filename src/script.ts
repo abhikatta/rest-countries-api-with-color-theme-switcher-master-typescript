@@ -43,7 +43,7 @@ const createData = (data: string, title?: string): HTMLParagraphElement => {
 };
 
 const showDetailedinfo = (v: CountryData) => {
-  const newUrl = `/detailed-info/country.html?country=${v.name.common}`;
+  const newUrl = `/country.html?country=${v.name.common}`;
   window.location.href = newUrl;
 };
 const renderElement = () => {

@@ -114,10 +114,9 @@ button {
   margin: 0 0.5rem;
   width: min-content;
   padding: 0.6rem 0.7rem;
-}
-.border-country:hover {
   cursor: pointer;
 }
+
 /* detailed view page */
 
 .detailed-main {

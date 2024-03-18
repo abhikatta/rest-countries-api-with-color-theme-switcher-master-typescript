@@ -1,4 +1,4 @@
-import { DetailedData, CountryData, LookUpData } from "../types";
+import { DetailedData } from "./types";
 // elements:
 const itemContainer = document.getElementById(
   "detailed-item-container"

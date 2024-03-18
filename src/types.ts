@@ -37,4 +37,4 @@ interface DetailedData extends CountryData {
   borders: string[];
 }
 
-export { CountryData, DetailedData, LookUpData };
+export type { CountryData, DetailedData, LookUpData };
