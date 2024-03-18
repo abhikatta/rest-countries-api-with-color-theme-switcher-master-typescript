@@ -64,9 +64,16 @@ const borderCountryLookup = (v) => {
 const renderDetailedElement = () => {
     const detailedCountry = detailedCountryData.map((country) => {
         const div = document.createElement("div");
+        div.className = "detailed-view-container";
         const image = createFlagImage(country.flags.png, country.flags.alt);
         const name = createData(country.name.common || "Unknown");
         name.className = "detailed-title";
+        // all data (flag+title+data+borders)
+        const allDataDiv = document.createElement("div");
+        allDataDiv.className = "detailed-all-data-div";
+        // main data div
+        const dataDiv = document.createElement("div");
+        dataDiv.className = "detailed-main-data";
         const nativeName = document.createElement("p");
         nativeName.textContent = "Native Name: ";
         for (const key in country.name.nativeName) {
@@ -95,18 +102,26 @@ const renderDetailedElement = () => {
         const borderCountriesContainer = document.createElement("div");
         borderCountriesContainer.textContent = "Border Countries: ";
         borderCountriesContainer.className = "border-countries-container";
-        country.borders.map((border) => {
-            const borderCountry = document.createElement("p");
-            borderCountry.className = "border-country";
-            const borderCountryName = borderCountryLookup(border);
-            borderCountry.textContent += borderCountryName;
-            borderCountriesContainer.append(borderCountry);
-            borderCountry.addEventListener("click", () => {
-                const newUrl = `/detailed-info/country.html?country=${borderCountryName}`;
-                window.location.href = newUrl;
-            });
-        });
-        div.append(image, name, nativeName, population, region, capital, subRegion, topLevelDomains, currencies, languages, borderCountriesContainer);
+        country.borders
+            ? country.borders.map((border) => {
+                const borderCountry = document.createElement("p");
+                borderCountry.className = "border-country";
+                const borderCountryName = borderCountryLookup(border);
+                borderCountry.textContent += borderCountryName;
+                borderCountriesContainer.append(borderCountry);
+                borderCountry.addEventListener("click", () => {
+                    const newUrl = `/detailed-info/country.html?country=${borderCountryName}`;
+                    window.location.href = newUrl;
+                });
+            })
+            : (borderCountriesContainer.textContent += "Unknown");
+        dataDiv.append(
+        // name,
+        nativeName, population, region, capital, subRegion, topLevelDomains, currencies, languages
+        // borderCountriesContainer
+        );
+        allDataDiv.append(name, dataDiv, borderCountriesContainer);
+        div.append(image, allDataDiv);
         return div;
     });
     itemContainer.append(detailedCountry[0]);
