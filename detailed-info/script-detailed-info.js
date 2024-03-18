@@ -14,7 +14,7 @@ const itemContainer = document.getElementById("detailed-item-container");
 const params = new URLSearchParams(window.location.search);
 const country = params.get("country");
 let detailedCountryData;
-let lookUpData;
+let lookUpData = new Map();
 // API endpoints
 const FILTERED_API_ENDPOINT = `https://restcountries.com/v3.1/name/${country}?fullText=true`;
 const LOOK_UP_URL = "https://restcountries.com/v3.1/all?fields=name,cca3";
@@ -22,7 +22,9 @@ const fetchLookUpData = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield fetch(LOOK_UP_URL);
         const data = yield res.json();
-        lookUpData = data;
+        data.map((country) => {
+            lookUpData.set(country.cca3, country.name.common);
+        });
     }
     catch (error) { }
     return null;
@@ -52,14 +54,12 @@ const createData = (data, title) => {
     return dataElement;
 };
 const borderCountryLookup = (v) => {
-    const country = lookUpData.find((item) => {
-        return item.cca3 === v;
-    });
-    if (country) {
-        return country.name.common;
+    if (lookUpData.has(v)) {
+        return lookUpData.get(v);
     }
-    else
+    else {
         return null;
+    }
 };
 const renderDetailedElement = () => {
     const detailedCountry = detailedCountryData.map((country) => {
