@@ -14,6 +14,7 @@ const main = document.getElementById("main");
 const countriesContainer = document.getElementById("item-container");
 const searchElement = document.getElementById("search");
 const filterElement = document.getElementById("filter");
+let darkModeOn = JSON.parse(localStorage.getItem("isDarkMode")) || false;
 // API endpoint
 const API_ENDPOINT = "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
 // data
@@ -85,6 +86,7 @@ const renderElement = () => {
             const population = createData(v.population.toString(), "Population");
             const region = createData(v.region, "Region");
             const capital = createData(v.capital ? v.capital[0] : "Unknown", "Capital");
+            checkDarkMode();
             item.append(flagElement, name, population, region, capital);
             return item;
         });
@@ -133,7 +135,23 @@ const removeFilter = () => {
     filterElement.value = "Filter by Region";
     renderElement();
 };
+const checkDarkMode = () => {
+    if (darkModeOn) {
+        document.body.classList.add("darkMode");
+    }
+    else {
+        document.body.classList.remove("darkMode");
+    }
+};
 const toggleDarkMode = () => {
+    darkModeOn = !darkModeOn;
+    if (darkModeOn) {
+        document.body.classList.add("darkMode");
+    }
+    else {
+        document.body.classList.remove("darkMode");
+    }
+    localStorage.setItem("isDarkMode", JSON.stringify(darkModeOn));
     console.log("Dark mode pressed");
 };
 window.addEventListener("load", () => __awaiter(void 0, void 0, void 0, function* () {

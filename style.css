@@ -1,29 +1,51 @@
 * {
   font-family: "Nunito Sans";
 }
+:root {
+  --background-body-color: hsl(0, 0%, 96%);
+  --nav-bg: hsl(0, 0%, 100%);
+  --text-color: hsl(200, 15%, 8%);
+  --element-bg: hsl(0, 0%, 100%);
+}
+.darkMode {
+  --background-body-color: hsl(207, 26%, 17%);
+  --nav-bg: hsl(209, 23%, 22%);
+  --text-color: hsl(0, 0%, 100%);
+  --element-bg: hsl(209, 23%, 22%);
+}
 body {
-  margin: 0 10rem;
+  margin: 0;
   padding: 0;
+  background-color: var(--background-body-color);
+  color: var(--text-color);
 }
 .main {
   font-family: "Nunito Sans";
   display: flex;
+  padding: 0 10rem;
   flex-direction: row;
   align-items: center;
+  background-color: var(--background-body-color);
   justify-content: space-between;
   margin: 2rem 0rem;
 }
 nav {
   display: flex;
+  padding: 0 10rem;
   flex-direction: row;
   align-items: center;
+  background-color: var(--element-bg);
   justify-content: space-between;
 }
 .darkMode-button {
   height: min-content;
+  color: var(--text-color);
+  background-color: transparent;
 }
 .item-container {
   display: grid;
+  padding: 0 10rem;
+  background-color: var(--background-body-color);
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: center;
@@ -33,11 +55,12 @@ nav {
   height: 100%;
   background-color: white;
   transition: 0.4s;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  cursor: pointer;
 }
 .item:hover {
-  cursor: pointer;
   transform: scale(110%);
-
   animation-duration: 0.4s;
 }
 .item p {
