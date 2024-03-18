@@ -47,7 +47,26 @@ nav {
   width: 100%;
   height: auto;
 }
-.item .title {
+.item .title,
+.detailed-title {
   font-size: 26px;
   font-weight: bolder;
+}
+
+.border-countries-container {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.border-country {
+  margin: 0 0.5rem;
+  width: min-content;
+  padding: 0.6rem 0.7rem;
+}
+.border-country:hover {
+  cursor: pointer;
 }

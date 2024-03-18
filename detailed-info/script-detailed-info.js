@@ -62,38 +62,40 @@ const borderCountryLookup = (v) => {
         return null;
 };
 const renderDetailedElement = () => {
-    const detailedCountry = detailedCountryData.map((v) => {
+    const detailedCountry = detailedCountryData.map((country) => {
         const div = document.createElement("div");
-        const image = createFlagImage(v.flags.png, v.flags.alt);
-        const name = createData(v.name.common || "Unknown");
+        const image = createFlagImage(country.flags.png, country.flags.alt);
+        const name = createData(country.name.common || "Unknown");
+        name.className = "detailed-title";
         const nativeName = document.createElement("p");
         nativeName.textContent = "Native Name: ";
-        for (const key in v.name.nativeName) {
-            const element = v.name.nativeName[key].common || "Unknown";
+        for (const key in country.name.nativeName) {
+            const element = country.name.nativeName[key].common || "Unknown";
             nativeName.textContent += element + ", ";
         }
-        const region = createData(v.region || "Unknown", "Region");
-        const subRegion = createData(v.subregion || "Unknown", "Sub Region");
-        const capital = createData(v.capital ? v.capital[0] : "Unknown", "Capital ");
-        const population = createData(v.population.toString() || "Unknown", "Population");
+        const region = createData(country.region || "Unknown", "Region");
+        const subRegion = createData(country.subregion || "Unknown", "Sub Region");
+        const capital = createData(country.capital ? country.capital[0] : "Unknown", "Capital ");
+        const population = createData(country.population.toString() || "Unknown", "Population");
         const topLevelDomains = document.createElement("p");
         topLevelDomains.textContent += "Top Level Domains: ";
-        v.tld.map((v) => (topLevelDomains.textContent += v + ", "));
+        country.tld.map((v) => (topLevelDomains.textContent += v + ", "));
         const currencies = document.createElement("p");
         currencies.textContent += "Currencies: ";
-        for (const key in v.currencies) {
-            const element = v.currencies[key];
+        for (const key in country.currencies) {
+            const element = country.currencies[key];
             currencies.textContent += element.name + ", ";
         }
         const languages = document.createElement("p");
         languages.textContent += "Languages: ";
-        for (const key in v.languages) {
-            const element = v.languages[key];
+        for (const key in country.languages) {
+            const element = country.languages[key];
             languages.textContent += element + ", ";
         }
         const borderCountriesContainer = document.createElement("div");
         borderCountriesContainer.textContent = "Border Countries: ";
-        v.borders.map((border) => {
+        borderCountriesContainer.className = "border-countries-container";
+        country.borders.map((border) => {
             const borderCountry = document.createElement("p");
             borderCountry.className = "border-country";
             const borderCountryName = borderCountryLookup(border);
