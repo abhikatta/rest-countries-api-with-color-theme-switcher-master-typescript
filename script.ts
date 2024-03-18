@@ -151,7 +151,6 @@ const toggleDarkMode = (): void => {
     document.body.classList.remove("darkMode");
   }
   localStorage.setItem("isDarkMode", JSON.stringify(darkModeOn));
-  console.log("Dark mode pressed");
 };
 window.addEventListener("load", async () => {
   await fetchAPIData();

@@ -42,6 +42,31 @@ nav {
   color: var(--text-color);
   background-color: transparent;
 }
+button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-weight: bold;
+}
+.filter,
+.search {
+  padding: 0.5rem 0.7rem;
+  width: max-content;
+  background-color: var(--element-bg);
+  border: none;
+  outline: none;
+  color: var(--text-color);
+}
+::placeholder {
+  color: var(--text-color);
+  opacity: 55%;
+}
+.search {
+  width: 14rem;
+}
+
 .item-container {
   display: grid;
   padding: 0 10rem;

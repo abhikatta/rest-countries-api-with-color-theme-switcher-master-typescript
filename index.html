@@ -27,7 +27,7 @@
         oninput="search()"
         placeholder="Search for a country..." />
       <div>
-        <select id="filter" oninput="filter()">
+        <select id="filter" class="filter" oninput="filter()">
           <option hidden>Filter by Region</option>
           <option>Africa</option>
           <option>Americas</option>
@@ -35,7 +35,7 @@
           <option>Europe</option>
           <option>Oceania</option>
         </select>
-        <button onclick="removeFilter()">x</button>
+        <button class="darkMode-button" onclick="removeFilter()">x</button>
       </div>
     </div>
     <div id="item-container" class="item-container"></div>
