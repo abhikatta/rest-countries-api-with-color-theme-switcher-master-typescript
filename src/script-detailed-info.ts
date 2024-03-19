@@ -142,7 +142,7 @@ const renderDetailedElement = () => {
           borderCountry.textContent += borderCountryName;
           borderCountriesContainer.append(borderCountry);
           borderCountry.addEventListener("click", () => {
-            const newUrl = `/detailed-info/country.html?country=${borderCountryName}`;
+            const newUrl = `country.html?country=${borderCountryName}`;
             window.location.href = newUrl;
           });
         })
