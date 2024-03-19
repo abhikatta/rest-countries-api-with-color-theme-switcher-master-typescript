@@ -25,7 +25,9 @@ const fetchLookUpData = async () => {
     data.map((country) => {
       lookUpData.set(country.cca3, country.name.common);
     });
-  } catch (error) {}
+  } catch (error) {
+    itemContainer.textContent = error;
+  }
   return null;
 };
 const fetchDetailedData = async () => {
