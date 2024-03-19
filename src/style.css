@@ -181,6 +181,46 @@ button {
     width: 100%;
     margin-left: 0.5rem;
   }
+  .main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 2rem;
+  }
+  .main input {
+    margin-top: 1rem;
+    width: 60%;
+    padding: 1rem 0.7rem;
+  }
+  .main select {
+    margin-top: 1rem;
+    padding: 1rem 0.7rem;
+  }
+  .main button {
+    background-color: var(--element-bg);
+    padding: 0.6rem 1rem;
+    margin-left: 1rem;
+  }
+
+  .item-container {
+    width: 100%;
+    margin: 1rem 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .item-container .item {
+    width: auto;
+  }
+  .item-container img {
+    width: 100%;
+    margin: 0;
+  }
 
   .detailed-main,
   .detailed-all-data-div,
