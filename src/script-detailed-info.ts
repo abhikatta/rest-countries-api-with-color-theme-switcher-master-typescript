@@ -102,8 +102,11 @@ const renderDetailedElement = () => {
       languages.textContent += element + ", ";
     }
     const borderCountriesContainer = document.createElement("div");
-    borderCountriesContainer.textContent = "Border Countries: ";
     borderCountriesContainer.className = "border-countries-container";
+    const borderCountryLabel = document.createElement("p");
+    borderCountryLabel.textContent = "Border Countries: ";
+    borderCountriesContainer.append(borderCountryLabel);
+
     country.borders
       ? country.borders.map((border) => {
           const borderCountry = document.createElement("p");
