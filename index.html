@@ -12,22 +12,16 @@
   <body>
     <nav>
       <h2>Where in the World?</h2>
-      <button
-        id="darkMode-button"
-        onclick="toggleDarkMode()"
-        class="darkMode-button">
-        Dark Mode
-      </button>
+      <button id="darkMode-button" class="darkMode-button">Dark Mode</button>
     </nav>
     <div id="main" class="main">
       <input
         type="search"
         id="search"
         class="search"
-        oninput="search()"
         placeholder="Search for a country..." />
       <div>
-        <select id="filter" class="filter" oninput="filter()">
+        <select id="filter" class="filter">
           <option hidden>Filter by Region</option>
           <option>Africa</option>
           <option>Americas</option>
@@ -35,7 +29,7 @@
           <option>Europe</option>
           <option>Oceania</option>
         </select>
-        <button class="darkMode-button" onclick="removeFilter()">x</button>
+        <button id="remove-filter" class="darkMode-button">x</button>
       </div>
     </div>
     <div id="item-container" class="item-container"></div>
@@ -46,6 +40,5 @@
     */
     var exports = {};
   </script>
-
-  <script src="./src/script.ts" defer></script>
+  <script type="module" src="./src/script.ts" defer></script>
 </html>

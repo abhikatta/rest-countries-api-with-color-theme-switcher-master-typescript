@@ -1,4 +1,5 @@
 import { CountryData } from "./types";
+import { showDetailedinfo } from "./utils";
 // elements
 const main = document.getElementById("main") as HTMLElement;
 const countriesContainer = document.getElementById(
@@ -6,6 +7,12 @@ const countriesContainer = document.getElementById(
 ) as HTMLElement;
 const searchElement = document.getElementById("search") as HTMLInputElement;
 const filterElement = document.getElementById("filter") as HTMLInputElement;
+const darkModeButton = document.getElementById(
+  "darkMode-button"
+) as HTMLButtonElement;
+const removeFilterButton = document.getElementById(
+  "remove-filter"
+) as HTMLButtonElement;
 let darkModeOn: boolean =
   JSON.parse(localStorage.getItem("isDarkMode")) || false;
 // API endpoint
@@ -42,10 +49,6 @@ const createData = (data: string, title?: string): HTMLParagraphElement => {
   return dataElement;
 };
 
-const showDetailedinfo = (countryItem: CountryData) => {
-  const newUrl = `/country.html?country=${countryItem.name.common}`;
-  window.location.href = newUrl;
-};
 const renderElement = () => {
   const searchValue = searchElement.value;
   const filterValue = filterElement.value;
@@ -76,7 +79,7 @@ const renderElement = () => {
     const countries = duplicateCountriesData.map((v) => {
       const item = document.createElement("div");
       item.className = "item";
-      item.addEventListener("click", () => showDetailedinfo(v));
+      item.addEventListener("click", () => showDetailedinfo(v.name.common));
 
       const flagElement = createFlagImage(v.flags.png, v.flags.alt);
       const name = createData(v.name.common);
@@ -157,3 +160,11 @@ window.addEventListener("load", async () => {
   renderElement();
   return null;
 });
+
+darkModeButton.addEventListener("click", () => {
+  toggleDarkMode();
+});
+
+filterElement.addEventListener("input", filter);
+removeFilterButton.addEventListener("click", removeFilter);
+searchElement.addEventListener("input", search);

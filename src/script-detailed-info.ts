@@ -1,15 +1,20 @@
 import { DetailedData } from "./types";
+import { showDetailedinfo } from "./utils";
 // elements:
 const itemContainer = document.getElementById(
   "detailed-item-container"
 ) as HTMLElement;
-
+const darkModeButton = document.getElementById(
+  "darkMode-button"
+) as HTMLButtonElement;
+const navTitle = document.getElementById("nav-title") as HTMLHeadingElement;
 const params = new URLSearchParams(window.location.search);
 const country = params.get("country");
 let detailedCountryData: DetailedData[];
 let lookUpData = new Map();
-let darkModeOn: boolean =
-  JSON.parse(localStorage.getItem("isDarkMode")) || false;
+let darkModeOn: boolean = JSON.parse(
+  localStorage.getItem("isDarkMode") || JSON.stringify(false)
+);
 // API endpoints
 const FILTERED_API_ENDPOINT = `https://restcountries.com/v3.1/name/${country}?fullText=true`;
 const LOOK_UP_URL = "https://restcountries.com/v3.1/all?fields=name,cca3";
@@ -47,7 +52,7 @@ const createSpanLabel = (data: string): HTMLSpanElement => {
   label.className = "label";
   return label;
 };
-const createData = (data: string, title?: string): HTMLParagraphElement => {
+const createData = (data: string, title: string): HTMLParagraphElement => {
   const dataElement = document.createElement("p");
   const dataElementLabel = createSpanLabel(title);
   dataElement.append(dataElementLabel);
@@ -61,10 +66,7 @@ const borderCountryLookup = (v: string): string | null => {
     return null;
   }
 };
-const showDetailedinfo = (countryName: string) => {
-  const newUrl = `/country.html?country=${countryName}`;
-  window.location.href = newUrl;
-};
+
 const renderDetailedElement = () => {
   const detailedCountry = detailedCountryData.map((country) => {
     const div = document.createElement("div");
@@ -173,6 +175,7 @@ const checkDarkMode = () => {
     document.body.classList.remove("darkMode");
   }
 };
+
 const toggleDarkMode = () => {
   darkModeOn = !darkModeOn;
   if (darkModeOn) {
@@ -190,3 +193,5 @@ window.addEventListener("load", async () => {
   await fetchDetailedData();
   renderDetailedElement();
 });
+darkModeButton.addEventListener("click", toggleDarkMode);
+navTitle.addEventListener("click", goHome);

@@ -11,13 +11,8 @@
   </head>
   <body>
     <nav>
-      <h2 onclick="goHome()">Where in the World?</h2>
-      <button
-        id="darkMode-button"
-        onclick="toggleDarkMode()"
-        class="darkMode-button">
-        Dark Mode
-      </button>
+      <h2 id="nav-title">Where in the World?</h2>
+      <button id="darkMode-button" class="darkMode-button">Dark Mode</button>
     </nav>
     <div class="detailed-main">
       <button class="back-button" onclick="window.history.back()">Back</button>
@@ -30,5 +25,5 @@
       */
     var exports = {};
   </script>
-  <script src="./src/script-detailed-info.ts" defer></script>
+  <script type="module" src="./src/script-detailed-info.ts" defer></script>
 </html>
