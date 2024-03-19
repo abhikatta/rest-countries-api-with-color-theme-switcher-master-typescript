@@ -37,6 +37,9 @@ nav {
   background-color: var(--element-bg);
   justify-content: space-between;
 }
+nav h2 {
+  cursor: pointer;
+}
 .darkMode-button {
   height: min-content;
   color: var(--text-color);
@@ -139,6 +142,7 @@ button {
   align-items: center;
   overflow-x: auto;
 }
+
 .border-countries-container p {
   min-width: max-content;
 }
@@ -148,6 +152,9 @@ button {
   padding: 0.6rem 0.7rem;
   cursor: pointer;
   background-color: var(--element-bg);
+}
+.label {
+  font-weight: bolder;
 }
 
 @media (max-width: 768px) {
@@ -174,6 +181,7 @@ button {
     width: 100%;
     margin-left: 0.5rem;
   }
+
   .detailed-main,
   .detailed-all-data-div,
   .detailed-all-data-div .detailed-title,

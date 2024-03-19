@@ -8,6 +8,8 @@ const params = new URLSearchParams(window.location.search);
 const country = params.get("country");
 let detailedCountryData: DetailedData[];
 let lookUpData = new Map();
+let darkModeOn: boolean =
+  JSON.parse(localStorage.getItem("isDarkMode")) || false;
 // API endpoints
 const FILTERED_API_ENDPOINT = `https://restcountries.com/v3.1/name/${country}?fullText=true`;
 const LOOK_UP_URL = "https://restcountries.com/v3.1/all?fields=name,cca3";
@@ -43,7 +45,10 @@ const createFlagImage = (url: string, alt: string): HTMLImageElement => {
 
 const createData = (data: string, title?: string): HTMLParagraphElement => {
   const dataElement = document.createElement("p");
-  dataElement.textContent = title ? title + ": " + data : data;
+  dataElement.innerHTML = `<span class='label'>${
+    title ? title + ": " + "</span>" + data : data
+  }`;
+  // dataElement.textContent = title ? title + ": " + data : data;
   return dataElement;
 };
 const borderCountryLookup = (v: string): string | null => {
@@ -68,16 +73,20 @@ const renderDetailedElement = () => {
     const dataDiv = document.createElement("div");
     dataDiv.className = "detailed-main-data";
     const nativeName = document.createElement("p");
-    nativeName.textContent = "Native Name: ";
+    const nativeNamelabel = document.createElement("span");
+    nativeNamelabel.className = "label";
+    nativeNamelabel.textContent = "Native Name: ";
+    nativeName.appendChild(nativeNamelabel);
+
     for (const key in country.name.nativeName) {
       const element = country.name.nativeName[key].common || "Unknown";
-      nativeName.textContent += element + ", ";
+      nativeName.appendChild(document.createTextNode(element + ", "));
     }
     const region = createData(country.region || "Unknown", "Region");
     const subRegion = createData(country.subregion || "Unknown", "Sub Region");
     const capital = createData(
       country.capital ? country.capital[0] : "Unknown",
-      "Capital "
+      "Capital"
     );
     const population = createData(
       country.population.toString() || "Unknown",
@@ -85,26 +94,41 @@ const renderDetailedElement = () => {
     );
 
     const topLevelDomains = document.createElement("p");
-    topLevelDomains.textContent += "Top Level Domains: ";
-    country.tld.map((v) => (topLevelDomains.textContent += v + ", "));
+    const tldLabel = document.createElement("span");
+    tldLabel.className = "label";
+    tldLabel.textContent = "Top Level Domains: ";
+    topLevelDomains.append(tldLabel);
+
+    country.tld.map((v) =>
+      topLevelDomains.append(document.createTextNode(v + ", "))
+    );
 
     const currencies = document.createElement("p");
-    currencies.textContent += "Currencies: ";
+    const currenciesLabel = document.createElement("span");
+    currenciesLabel.append(document.createTextNode("Currencies: "));
+    currenciesLabel.className = "label";
+    currencies.append(currenciesLabel);
+    // currencies.textContent += "Currencies: ";
+
     for (const key in country.currencies) {
       const element = country.currencies[key];
-      currencies.textContent += element.name + ", ";
+      currencies.append(document.createTextNode(element.name + ", "));
     }
 
     const languages = document.createElement("p");
-    languages.textContent += "Languages: ";
+    const languagesLabel = document.createElement("span");
+    languagesLabel.append(document.createTextNode("Languages: "));
+    languagesLabel.className = "label";
+    languages.append(languagesLabel);
     for (const key in country.languages) {
       const element = country.languages[key];
-      languages.textContent += element + ", ";
+      languages.append(document.createTextNode(element + ", "));
     }
     const borderCountriesContainer = document.createElement("div");
     borderCountriesContainer.className = "border-countries-container";
-    const borderCountryLabel = document.createElement("p");
-    borderCountryLabel.textContent = "Border Countries: ";
+    const borderCountryLabel = document.createElement("span");
+    borderCountryLabel.append(document.createTextNode("Border Countries: "));
+    borderCountryLabel.className = "label";
     borderCountriesContainer.append(borderCountryLabel);
 
     country.borders
@@ -120,6 +144,7 @@ const renderDetailedElement = () => {
           });
         })
       : (borderCountriesContainer.textContent += "Unknown");
+    checkDarkMode();
     dataDiv.append(
       // name,
       nativeName,
@@ -139,7 +164,25 @@ const renderDetailedElement = () => {
   itemContainer.append(detailedCountry[0]);
   return null;
 };
-
+const checkDarkMode = () => {
+  if (darkModeOn) {
+    document.body.classList.add("darkMode");
+  } else {
+    document.body.classList.remove("darkMode");
+  }
+};
+const toggleDarkMode = () => {
+  darkModeOn = !darkModeOn;
+  if (darkModeOn) {
+    document.body.classList.add("darkMode");
+  } else {
+    document.body.classList.remove("darkMode");
+  }
+  localStorage.setItem("isDarkMode", JSON.stringify(darkModeOn));
+};
+const goHome = () => {
+  window.location.href = window.location.origin;
+};
 window.addEventListener("load", async () => {
   await fetchLookUpData();
   await fetchDetailedData();
