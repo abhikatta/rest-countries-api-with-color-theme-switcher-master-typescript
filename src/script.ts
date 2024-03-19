@@ -42,8 +42,8 @@ const createData = (data: string, title?: string): HTMLParagraphElement => {
   return dataElement;
 };
 
-const showDetailedinfo = (v: CountryData) => {
-  const newUrl = `/country.html?country=${v.name.common}`;
+const showDetailedinfo = (countryItem: CountryData) => {
+  const newUrl = `/country.html?country=${countryItem.name.common}`;
   window.location.href = newUrl;
 };
 const renderElement = () => {

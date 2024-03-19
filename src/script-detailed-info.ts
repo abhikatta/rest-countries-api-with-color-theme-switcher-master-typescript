@@ -35,7 +35,6 @@ const fetchDetailedData = async () => {
   }
   return null;
 };
-
 const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   const flagElement = document.createElement("img");
   flagElement.src = url;
@@ -61,6 +60,10 @@ const borderCountryLookup = (v: string): string | null => {
   } else {
     return null;
   }
+};
+const showDetailedinfo = (countryName: string) => {
+  const newUrl = `/country.html?country=${countryName}`;
+  window.location.href = newUrl;
 };
 const renderDetailedElement = () => {
   const detailedCountry = detailedCountryData.map((country) => {
@@ -111,7 +114,6 @@ const renderDetailedElement = () => {
     currenciesLabel.append(document.createTextNode("Currencies: "));
     currenciesLabel.className = "label";
     currencies.append(currenciesLabel);
-    // currencies.textContent += "Currencies: ";
 
     for (const key in country.currencies) {
       const element = country.currencies[key];
@@ -141,15 +143,13 @@ const renderDetailedElement = () => {
           const borderCountryName = borderCountryLookup(border);
           borderCountry.textContent += borderCountryName;
           borderCountriesContainer.append(borderCountry);
-          borderCountry.addEventListener("click", () => {
-            const newUrl = `country.html?country=${borderCountryName}`;
-            window.location.href = newUrl;
-          });
+          borderCountry.addEventListener("click", () =>
+            showDetailedinfo(borderCountryName)
+          );
         })
       : (borderCountriesContainer.textContent += "Unknown");
     checkDarkMode();
     dataDiv.append(
-      // name,
       nativeName,
       population,
       region,
@@ -158,7 +158,6 @@ const renderDetailedElement = () => {
       topLevelDomains,
       currencies,
       languages
-      // borderCountriesContainer
     );
     allDataDiv.append(name, dataDiv, borderCountriesContainer);
     div.append(image, allDataDiv);
