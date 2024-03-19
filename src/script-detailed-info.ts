@@ -42,13 +42,17 @@ const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   flagElement.alt = alt;
   return flagElement;
 };
-
+const createSpanLabel = (data: string): HTMLSpanElement => {
+  const label = document.createElement("span");
+  label.textContent = data + ": ";
+  label.className = "label";
+  return label;
+};
 const createData = (data: string, title?: string): HTMLParagraphElement => {
   const dataElement = document.createElement("p");
-  dataElement.innerHTML = `<span class='label'>${
-    title ? title + ": " + "</span>" + data : data
-  }`;
-  // dataElement.textContent = title ? title + ": " + data : data;
+  const dataElementLabel = createSpanLabel(title);
+  dataElement.append(dataElementLabel);
+  dataElement.append(document.createTextNode(data));
   return dataElement;
 };
 const borderCountryLookup = (v: string): string | null => {
@@ -63,7 +67,8 @@ const renderDetailedElement = () => {
     const div = document.createElement("div");
     div.className = "detailed-view-container";
     const image = createFlagImage(country.flags.png, country.flags.alt);
-    const name = createData(country.name.common || "Unknown");
+    const name = document.createElement("p");
+    name.textContent = country.name.common;
     name.className = "detailed-title";
 
     // all data (flag+title+data+borders)
@@ -73,9 +78,7 @@ const renderDetailedElement = () => {
     const dataDiv = document.createElement("div");
     dataDiv.className = "detailed-main-data";
     const nativeName = document.createElement("p");
-    const nativeNamelabel = document.createElement("span");
-    nativeNamelabel.className = "label";
-    nativeNamelabel.textContent = "Native Name: ";
+    const nativeNamelabel = createSpanLabel("Native Name");
     nativeName.appendChild(nativeNamelabel);
 
     for (const key in country.name.nativeName) {
