@@ -26,7 +26,9 @@ const fetchLookUpData = async () => {
       lookUpData.set(country.cca3, country.name.common);
     });
   } catch (error) {
-    itemContainer.textContent = error;
+    if (error instanceof Error) {
+      itemContainer.textContent = error.message;
+    }
   }
   return null;
 };
@@ -64,9 +66,8 @@ const createData = (data: string, title: string): HTMLParagraphElement => {
 const borderCountryLookup = (v: string): string | null => {
   if (lookUpData.has(v)) {
     return lookUpData.get(v);
-  } else {
-    return null;
   }
+  return null;
 };
 
 const renderDetailedElement = () => {
@@ -142,14 +143,16 @@ const renderDetailedElement = () => {
 
     country.borders
       ? country.borders.map((border) => {
-          const borderCountry = document.createElement("p");
-          borderCountry.className = "border-country";
           const borderCountryName = borderCountryLookup(border);
-          borderCountry.textContent += borderCountryName;
-          borderCountriesContainer.append(borderCountry);
-          borderCountry.addEventListener("click", () =>
-            showDetailedinfo(borderCountryName)
-          );
+          if (borderCountryName) {
+            const borderCountry = document.createElement("p");
+            borderCountry.className = "border-country";
+            borderCountry.textContent += borderCountryName;
+            borderCountriesContainer.append(borderCountry);
+            borderCountry.addEventListener("click", () =>
+              showDetailedinfo(borderCountryName)
+            );
+          }
         })
       : (borderCountriesContainer.textContent += "Unknown");
     checkDarkMode();

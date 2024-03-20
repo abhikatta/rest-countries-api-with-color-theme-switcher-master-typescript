@@ -13,8 +13,9 @@ const darkModeButton = document.getElementById(
 const removeFilterButton = document.getElementById(
   "remove-filter"
 ) as HTMLButtonElement;
-let darkModeOn: boolean =
-  JSON.parse(localStorage.getItem("isDarkMode")) || false;
+let darkModeOn: boolean = JSON.parse(
+  localStorage.getItem("isDarkMode") || JSON.stringify(false)
+);
 // API endpoint
 const API_ENDPOINT =
   "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
@@ -76,18 +77,26 @@ const renderElement = () => {
       duplicateCountriesData = countriesData;
     }
 
-    const countries = duplicateCountriesData.map((v) => {
+    const countries = duplicateCountriesData.map((countryItem) => {
       const item = document.createElement("div");
       item.className = "item";
-      item.addEventListener("click", () => showDetailedinfo(v.name.common));
+      item.addEventListener("click", () =>
+        showDetailedinfo(countryItem.name.common)
+      );
 
-      const flagElement = createFlagImage(v.flags.png, v.flags.alt);
-      const name = createData(v.name.common);
+      const flagElement = createFlagImage(
+        countryItem.flags.png,
+        countryItem.flags.alt
+      );
+      const name = createData(countryItem.name.common);
       name.className = "title";
-      const population = createData(v.population.toString(), "Population");
-      const region = createData(v.region, "Region");
+      const population = createData(
+        countryItem.population.toString(),
+        "Population"
+      );
+      const region = createData(countryItem.region, "Region");
       const capital = createData(
-        v.capital ? v.capital[0] : "Unknown",
+        countryItem.capital ? countryItem.capital[0] : "Unknown",
         "Capital"
       );
       checkDarkMode();
@@ -118,7 +127,6 @@ const search = (): void => {
     duplicateCountriesData = countriesData;
   }
   renderElement();
-  return null;
 };
 
 const filter = (): void => {
