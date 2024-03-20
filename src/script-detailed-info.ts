@@ -1,5 +1,5 @@
 import { DetailedData } from "./types";
-import { fetchAPIData, showDetailedinfo } from "./utils";
+import { createFlagImage, fetchAPIData, showDetailedinfo } from "./utils";
 // elements:
 const itemContainer = document.getElementById(
   "detailed-item-container"
@@ -33,12 +33,6 @@ const fetchLookUpData = async () => {
   return null;
 };
 
-const createFlagImage = (url: string, alt: string): HTMLImageElement => {
-  const flagElement = document.createElement("img");
-  flagElement.src = url;
-  flagElement.alt = alt;
-  return flagElement;
-};
 const createSpanLabel = (data: string): HTMLSpanElement => {
   const label = document.createElement("span");
   label.textContent = data + ": ";

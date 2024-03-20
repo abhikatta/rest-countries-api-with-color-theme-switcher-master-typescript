@@ -24,4 +24,16 @@ const fetchAPIData = async <G extends CountryData | DetailedData>(
   }
 };
 
-export { showDetailedinfo, fetchAPIData };
+const createData = (data: string, title?: string): HTMLParagraphElement => {
+  const dataElement = document.createElement("p");
+  dataElement.textContent = title ? title + ": " + data : data;
+  return dataElement;
+};
+
+const createFlagImage = (url: string, alt: string): HTMLImageElement => {
+  const flagElement = document.createElement("img");
+  flagElement.src = url;
+  flagElement.alt = alt;
+  return flagElement;
+};
+export { showDetailedinfo, fetchAPIData, createData, createFlagImage };

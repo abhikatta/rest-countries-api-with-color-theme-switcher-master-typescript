@@ -1,5 +1,10 @@
 import { CountryData } from "./types";
-import { fetchAPIData, showDetailedinfo } from "./utils";
+import {
+  createData,
+  createFlagImage,
+  fetchAPIData,
+  showDetailedinfo,
+} from "./utils";
 
 // elements
 const main: HTMLElement = document.getElementById("main")!;
@@ -24,19 +29,6 @@ const API_ENDPOINT =
 // data
 let countriesData: CountryData[];
 let duplicateCountriesData: CountryData[];
-
-const createFlagImage = (url: string, alt: string): HTMLImageElement => {
-  const flagElement = document.createElement("img");
-  flagElement.src = url;
-  flagElement.alt = alt;
-  return flagElement;
-};
-
-const createData = (data: string, title?: string): HTMLParagraphElement => {
-  const dataElement = document.createElement("p");
-  dataElement.textContent = title ? title + ": " + data : data;
-  return dataElement;
-};
 
 const renderElement = () => {
   const searchValue = searchElement.value;
