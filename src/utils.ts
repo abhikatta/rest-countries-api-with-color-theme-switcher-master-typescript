@@ -10,8 +10,6 @@ const fetchAPIData = async <G extends CountryData | DetailedData>(
   main: HTMLElement,
   API_ENDPOINT: string
 ): Promise<G[] | null> => {
-  console.log(API_ENDPOINT);
-
   try {
     const res = await fetch(API_ENDPOINT);
     const data: G[] = await res.json();

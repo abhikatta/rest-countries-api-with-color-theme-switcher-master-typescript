@@ -157,5 +157,3 @@ darkModeButton.addEventListener("click", () => {
 filterElement.addEventListener("input", filter);
 removeFilterButton.addEventListener("click", removeFilter);
 searchElement.addEventListener("input", search);
-
-export { createData, createFlagImage };
