@@ -1,5 +1,5 @@
 import { DetailedData } from "./types";
-import { showDetailedinfo } from "./utils";
+import { fetchAPIData, showDetailedinfo } from "./utils";
 // elements:
 const itemContainer = document.getElementById(
   "detailed-item-container"
@@ -32,18 +32,7 @@ const fetchLookUpData = async () => {
   }
   return null;
 };
-const fetchDetailedData = async () => {
-  try {
-    const res = await fetch(FILTERED_API_ENDPOINT);
-    const data = await res.json();
-    detailedCountryData = data;
-  } catch (error) {
-    if (error instanceof Error) {
-      itemContainer.textContent = `Something went Wrong!\n,${error.message}`;
-    }
-  }
-  return null;
-};
+
 const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   const flagElement = document.createElement("img");
   flagElement.src = url;
@@ -195,7 +184,14 @@ const goHome = () => {
 };
 window.addEventListener("load", async () => {
   await fetchLookUpData();
-  await fetchDetailedData();
+
+  const countriesDataArray = await fetchAPIData<DetailedData>(
+    itemContainer,
+    FILTERED_API_ENDPOINT
+  );
+  if (countriesDataArray) {
+    detailedCountryData = [...countriesDataArray];
+  }
   renderDetailedElement();
 });
 darkModeButton.addEventListener("click", toggleDarkMode);

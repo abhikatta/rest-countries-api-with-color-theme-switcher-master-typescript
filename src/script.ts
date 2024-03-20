@@ -1,7 +1,8 @@
 import { CountryData } from "./types";
-import { showDetailedinfo } from "./utils";
+import { fetchAPIData, showDetailedinfo } from "./utils";
+
 // elements
-const main = document.getElementById("main") as HTMLElement;
+const main: HTMLElement = document.getElementById("main")!;
 const countriesContainer = document.getElementById(
   "item-container"
 ) as HTMLElement;
@@ -23,19 +24,6 @@ const API_ENDPOINT =
 // data
 let countriesData: CountryData[];
 let duplicateCountriesData: CountryData[];
-const fetchAPIData = async () => {
-  try {
-    const res = await fetch(API_ENDPOINT);
-    const data = await res.json();
-    countriesData = JSON.parse(JSON.stringify(data));
-    duplicateCountriesData = JSON.parse(JSON.stringify(countriesData));
-  } catch (error) {
-    if (error instanceof Error) {
-      main.textContent = `${"something went wrong" + error.message}`;
-    }
-  }
-  return null;
-};
 
 const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   const flagElement = document.createElement("img");
@@ -54,63 +42,57 @@ const renderElement = () => {
   const searchValue = searchElement.value;
   const filterValue = filterElement.value;
 
-  try {
-    countriesContainer.replaceChildren();
-    if (searchValue) {
-      duplicateCountriesData = countriesData.filter((country) => {
-        return country.name.common
-          .toLowerCase()
-          .trim()
-          .includes(searchValue.toLowerCase().trim());
-      });
-    } else if (!searchValue) {
-      duplicateCountriesData = countriesData;
-    }
-    if (filterValue && filterValue !== "Filter by Region") {
-      duplicateCountriesData = duplicateCountriesData.filter((country) => {
-        return country.region
-          .toLowerCase()
-          .trim()
-          .includes(filterValue.trim().toLowerCase());
-      });
-    } else if (!filterValue) {
-      duplicateCountriesData = countriesData;
-    }
-
-    const countries = duplicateCountriesData.map((countryItem) => {
-      const item = document.createElement("div");
-      item.className = "item";
-      item.addEventListener("click", () =>
-        showDetailedinfo(countryItem.name.common)
-      );
-
-      const flagElement = createFlagImage(
-        countryItem.flags.png,
-        countryItem.flags.alt
-      );
-      const name = createData(countryItem.name.common);
-      name.className = "title";
-      const population = createData(
-        countryItem.population.toString(),
-        "Population"
-      );
-      const region = createData(countryItem.region, "Region");
-      const capital = createData(
-        countryItem.capital ? countryItem.capital[0] : "Unknown",
-        "Capital"
-      );
-      checkDarkMode();
-      item.append(flagElement, name, population, region, capital);
-      return item;
+  countriesContainer.replaceChildren();
+  if (searchValue) {
+    duplicateCountriesData = countriesData.filter((country) => {
+      return country.name.common
+        .toLowerCase()
+        .trim()
+        .includes(searchValue.toLowerCase().trim());
     });
-    countries.map((country) => {
-      countriesContainer.append(country);
-    });
-  } catch (error) {
-    if (error instanceof Error) {
-      main.textContent = `${"something went wrong" + error.message}`;
-    }
+  } else if (!searchValue) {
+    duplicateCountriesData = countriesData;
   }
+  if (filterValue && filterValue !== "Filter by Region") {
+    duplicateCountriesData = duplicateCountriesData.filter((country) => {
+      return country.region
+        .toLowerCase()
+        .trim()
+        .includes(filterValue.trim().toLowerCase());
+    });
+  } else if (!filterValue) {
+    duplicateCountriesData = countriesData;
+  }
+
+  const countries = duplicateCountriesData.map((countryItem) => {
+    const item = document.createElement("div");
+    item.className = "item";
+    item.addEventListener("click", () =>
+      showDetailedinfo(countryItem.name.common)
+    );
+
+    const flagElement = createFlagImage(
+      countryItem.flags.png,
+      countryItem.flags.alt
+    );
+    const name = createData(countryItem.name.common);
+    name.className = "title";
+    const population = createData(
+      countryItem.population.toString(),
+      "Population"
+    );
+    const region = createData(countryItem.region, "Region");
+    const capital = createData(
+      countryItem.capital ? countryItem.capital[0] : "Unknown",
+      "Capital"
+    );
+    checkDarkMode();
+    item.append(flagElement, name, population, region, capital);
+    return item;
+  });
+  countries.map((country) => {
+    countriesContainer.append(country);
+  });
 };
 
 const search = (): void => {
@@ -164,7 +146,14 @@ const toggleDarkMode = (): void => {
   localStorage.setItem("isDarkMode", JSON.stringify(darkModeOn));
 };
 window.addEventListener("load", async () => {
-  await fetchAPIData();
+  const countriesDataArray = await fetchAPIData<CountryData>(
+    main,
+    API_ENDPOINT
+  );
+  if (countriesDataArray) {
+    countriesData = countriesDataArray;
+    duplicateCountriesData = [...countriesData];
+  }
   renderElement();
   return null;
 });
@@ -176,3 +165,5 @@ darkModeButton.addEventListener("click", () => {
 filterElement.addEventListener("input", filter);
 removeFilterButton.addEventListener("click", removeFilter);
 searchElement.addEventListener("input", search);
+
+export { createData, createFlagImage };
