@@ -1,32 +1,6 @@
 import { filter, search } from "../utils";
 
 import { CountryData } from "../types";
-
-// describe("filters value from the data array and returns them ", () => {
-//   test("successfull filtering", () => {
-//     const filterElement = document.createElement("select") as HTMLSelectElement;
-//     const region = "Europe";
-//     filterElement.value = region;
-
-//     const duplicateCountriesData = JSON.parse(JSON.stringify(filterData));
-//     const countriesData = [...duplicateCountriesData];
-//     const render = () => {
-//       console.log("render function ran");
-//     };
-//     const data = filter(
-//       filterElement,
-//       duplicateCountriesData,
-//       countriesData,
-//       render
-//     );
-//     console.log(data);
-//     console.log(countriesData);
-
-//     data.map((country) => {
-//       expect(country.region.toLowerCase()).toBe(region.toLowerCase());
-//     });
-//   });
-// });
 const duplicateCountriesData: CountryData[] = [
   {
     name: {
