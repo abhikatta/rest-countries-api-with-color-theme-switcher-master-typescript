@@ -128,7 +128,7 @@ darkModeButton.addEventListener("click", () => {
 
 filterElement.addEventListener("input", () => {
   duplicateCountriesData = filter(
-    filterElement,
+    filterElement.value,
     duplicateCountriesData,
     countriesData,
     renderElement
@@ -137,7 +137,7 @@ filterElement.addEventListener("input", () => {
 removeFilterButton.addEventListener("click", removeFilter);
 searchElement.addEventListener("input", () => {
   duplicateCountriesData = search(
-    searchElement,
+    searchElement.value,
     duplicateCountriesData,
     countriesData,
     renderElement

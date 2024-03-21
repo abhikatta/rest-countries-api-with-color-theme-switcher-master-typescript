@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.88% </span>
+                <span class="strong">69.04% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/45</span>
+                <span class='fraction'>29/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.88% </span>
+                <span class="strong">69.04% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/45</span>
+                <span class='fraction'>29/42</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -149,12 +149,7 @@
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,8 +193,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -219,22 +212,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,13 +273,11 @@ const createFlagImage = <span class="fstat-no" title="function not covered" >(u<
 };
 &nbsp;
 const search = <span class="fstat-no" title="function not covered" >(</span>
-  searchElement: HTMLInputElement,
+  searchValue: string,
   duplicateCountriesData: CountryData[],
   countriesData: CountryData[],
   renderElement: CallableFunction
 ): CountryData[] =&gt; {
-  const searchValue = <span class="cstat-no" title="statement not covered" >searchElement.value;</span>
-&nbsp;
 <span class="cstat-no" title="statement not covered" >  if (searchValue) {</span>
 <span class="cstat-no" title="statement not covered" >    duplicateCountriesData = duplicateCountriesData.filter(<span class="fstat-no" title="function not covered" >(c</span>ountry) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      return country.name.common</span>
@@ -304,28 +292,25 @@ const search = <span class="fstat-no" title="function not covered" >(</span>
 <span class="cstat-no" title="statement not covered" >  return duplicateCountriesData;</span>
 };
 &nbsp;
-const filter = <span class="fstat-no" title="function not covered" >(</span>
-  filterElement: HTMLSelectElement,
+const filter = (
+  filterValue: string | null,
   duplicateCountriesData: CountryData[],
   countriesData: CountryData[],
   renderElement: CallableFunction
 ): CountryData[] =&gt; {
-  const filterValue = <span class="cstat-no" title="statement not covered" >filterElement.value;</span>
-<span class="cstat-no" title="statement not covered" >  console.log(filterValue);</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  if (filterValue) {</span>
-<span class="cstat-no" title="statement not covered" >    duplicateCountriesData = duplicateCountriesData.filter(<span class="fstat-no" title="function not covered" >(c</span>ountry) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      return country.region</span>
+  if (filterValue) {
+    duplicateCountriesData = duplicateCountriesData.filter((country) =&gt; {
+      return country.region
         .toLowerCase()
         .trim()
         .includes(filterValue.trim().toLowerCase());
     });
-<span class="cstat-no" title="statement not covered" >    renderElement();</span>
-<span class="cstat-no" title="statement not covered" >    return duplicateCountriesData;</span>
+    renderElement();
+    return duplicateCountriesData;
   } else {
-<span class="cstat-no" title="statement not covered" >    duplicateCountriesData = countriesData;</span>
+    duplicateCountriesData = countriesData;
   }
-<span class="cstat-no" title="statement not covered" >  return duplicateCountriesData;</span>
+  return duplicateCountriesData;
 };
 &nbsp;
 export {
@@ -343,7 +328,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-21T07:01:14.201Z
+                at 2024-03-21T07:46:43.838Z
             </div>
         <script src="prettify.js"></script>
         <script>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711004474209" clover="3.2.0">
-  <project timestamp="1711004474209" name="All files">
-    <metrics statements="45" coveredstatements="22" conditionals="7" coveredconditionals="3" methods="8" coveredmethods="2" elements="60" coveredelements="27" complexity="0" loc="45" ncloc="45" packages="1" files="1" classes="1"/>
+<coverage generated="1711007203844" clover="3.2.0">
+  <project timestamp="1711007203844" name="All files">
+    <metrics statements="42" coveredstatements="29" conditionals="7" coveredconditionals="5" methods="8" coveredmethods="4" elements="57" coveredelements="38" complexity="0" loc="42" ncloc="42" packages="1" files="1" classes="1"/>
     <file name="utils.ts" path="D:\ScaleReal\rest-countries-api-with-color-theme-switcher-master-typescript\src\utils.ts">
-      <metrics statements="45" coveredstatements="22" conditionals="7" coveredconditionals="3" methods="8" coveredmethods="2"/>
+      <metrics statements="42" coveredstatements="29" conditionals="7" coveredconditionals="5" methods="8" coveredmethods="4"/>
       <line num="3" count="3" type="stmt"/>
       <line num="5" count="0" type="stmt"/>
       <line num="6" count="0" type="stmt"/>
@@ -26,29 +26,26 @@
       <line num="34" count="0" type="stmt"/>
       <line num="35" count="0" type="stmt"/>
       <line num="38" count="3" type="stmt"/>
-      <line num="44" count="0" type="stmt"/>
-      <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="47" count="0" type="stmt"/>
-      <line num="48" count="0" type="stmt"/>
+      <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="45" count="0" type="stmt"/>
+      <line num="46" count="0" type="stmt"/>
+      <line num="52" count="0" type="stmt"/>
       <line num="54" count="0" type="stmt"/>
-      <line num="56" count="0" type="stmt"/>
-      <line num="57" count="0" type="stmt"/>
-      <line num="60" count="3" type="stmt"/>
-      <line num="66" count="0" type="stmt"/>
-      <line num="67" count="0" type="stmt"/>
-      <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="70" count="0" type="stmt"/>
-      <line num="71" count="0" type="stmt"/>
-      <line num="76" count="0" type="stmt"/>
-      <line num="77" count="0" type="stmt"/>
-      <line num="79" count="0" type="stmt"/>
-      <line num="81" count="0" type="stmt"/>
+      <line num="55" count="0" type="stmt"/>
+      <line num="58" count="3" type="stmt"/>
+      <line num="64" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="65" count="1" type="stmt"/>
+      <line num="66" count="5" type="stmt"/>
+      <line num="71" count="1" type="stmt"/>
+      <line num="72" count="1" type="stmt"/>
+      <line num="74" count="1" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="80" count="3" type="stmt"/>
+      <line num="81" count="3" type="stmt"/>
+      <line num="82" count="3" type="stmt"/>
+      <line num="83" count="3" type="stmt"/>
+      <line num="84" count="3" type="stmt"/>
       <line num="85" count="3" type="stmt"/>
-      <line num="86" count="3" type="stmt"/>
-      <line num="87" count="3" type="stmt"/>
-      <line num="88" count="3" type="stmt"/>
-      <line num="89" count="3" type="stmt"/>
-      <line num="90" count="3" type="stmt"/>
     </file>
   </project>
 </coverage>

@@ -36,13 +36,11 @@ const createFlagImage = (url: string, alt: string): HTMLImageElement => {
 };
 
 const search = (
-  searchElement: HTMLInputElement,
+  searchValue: string,
   duplicateCountriesData: CountryData[],
   countriesData: CountryData[],
   renderElement: CallableFunction
 ): CountryData[] => {
-  const searchValue = searchElement.value;
-
   if (searchValue) {
     duplicateCountriesData = duplicateCountriesData.filter((country) => {
       return country.name.common
@@ -58,14 +56,11 @@ const search = (
 };
 
 const filter = (
-  filterElement: HTMLSelectElement,
+  filterValue: string | null,
   duplicateCountriesData: CountryData[],
   countriesData: CountryData[],
   renderElement: CallableFunction
 ): CountryData[] => {
-  const filterValue = filterElement.value;
-  console.log(filterValue);
-
   if (filterValue) {
     duplicateCountriesData = duplicateCountriesData.filter((country) => {
       return country.region
