@@ -36,7 +36,7 @@ const createFlagImage = (url: string, alt: string): HTMLImageElement => {
 };
 
 const search = (
-  searchValue: string,
+  searchValue: string | null,
   duplicateCountriesData: CountryData[],
   countriesData: CountryData[],
   renderElement: CallableFunction
