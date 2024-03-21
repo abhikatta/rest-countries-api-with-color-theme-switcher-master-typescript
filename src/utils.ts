@@ -34,4 +34,58 @@ const createFlagImage = (url: string, alt: string): HTMLImageElement => {
   flagElement.alt = alt;
   return flagElement;
 };
-export { showDetailedinfo, fetchAPIData, createData, createFlagImage };
+
+const search = (
+  searchElement: HTMLInputElement,
+  duplicateCountriesData: CountryData[],
+  countriesData: CountryData[],
+  renderElement: CallableFunction
+): CountryData[] => {
+  const searchValue = searchElement.value;
+
+  if (searchValue) {
+    duplicateCountriesData = duplicateCountriesData.filter((country) => {
+      return country.name.common
+        .toLowerCase()
+        .trim()
+        .includes(searchValue.toLowerCase().trim());
+    });
+  } else {
+    duplicateCountriesData = countriesData;
+  }
+  renderElement();
+  return duplicateCountriesData;
+};
+
+const filter = (
+  filterElement: HTMLSelectElement,
+  duplicateCountriesData: CountryData[],
+  countriesData: CountryData[],
+  renderElement: CallableFunction
+): CountryData[] => {
+  const filterValue = filterElement.value;
+  console.log(filterValue);
+
+  if (filterValue) {
+    duplicateCountriesData = duplicateCountriesData.filter((country) => {
+      return country.region
+        .toLowerCase()
+        .trim()
+        .includes(filterValue.trim().toLowerCase());
+    });
+    renderElement();
+    return duplicateCountriesData;
+  } else {
+    duplicateCountriesData = countriesData;
+  }
+  return duplicateCountriesData;
+};
+
+export {
+  showDetailedinfo,
+  fetchAPIData,
+  createData,
+  createFlagImage,
+  search,
+  filter,
+};

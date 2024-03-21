@@ -3,6 +3,8 @@ import {
   createData,
   createFlagImage,
   fetchAPIData,
+  filter,
+  search,
   showDetailedinfo,
 } from "./utils";
 
@@ -12,7 +14,7 @@ const countriesContainer = document.getElementById(
   "item-container"
 ) as HTMLElement;
 const searchElement = document.getElementById("search") as HTMLInputElement;
-const filterElement = document.getElementById("filter") as HTMLInputElement;
+const filterElement = document.getElementById("filter") as HTMLSelectElement;
 const darkModeButton = document.getElementById(
   "darkMode-button"
 ) as HTMLButtonElement;
@@ -87,36 +89,6 @@ const renderElement = () => {
   });
 };
 
-const search = (): void => {
-  const searchValue = searchElement.value;
-
-  if (searchValue) {
-    duplicateCountriesData = duplicateCountriesData.filter((country) => {
-      return country.name.common
-        .toLowerCase()
-        .trim()
-        .includes(searchValue.toLowerCase().trim());
-    });
-  } else {
-    duplicateCountriesData = countriesData;
-  }
-  renderElement();
-};
-
-const filter = (): void => {
-  const filterValue = filterElement.value;
-  if (filterValue) {
-    duplicateCountriesData = duplicateCountriesData.filter((country) => {
-      return country.region
-        .toLowerCase()
-        .trim()
-        .includes(filterValue.trim().toLowerCase());
-    });
-    renderElement();
-  } else {
-    duplicateCountriesData = countriesData;
-  }
-};
 const removeFilter = (): void => {
   filterElement.value = "Filter by Region";
   renderElement();
@@ -154,6 +126,20 @@ darkModeButton.addEventListener("click", () => {
   toggleDarkMode();
 });
 
-filterElement.addEventListener("input", filter);
+filterElement.addEventListener("input", () => {
+  duplicateCountriesData = filter(
+    filterElement,
+    duplicateCountriesData,
+    countriesData,
+    renderElement
+  );
+});
 removeFilterButton.addEventListener("click", removeFilter);
-searchElement.addEventListener("input", search);
+searchElement.addEventListener("input", () => {
+  duplicateCountriesData = search(
+    searchElement,
+    duplicateCountriesData,
+    countriesData,
+    renderElement
+  );
+});

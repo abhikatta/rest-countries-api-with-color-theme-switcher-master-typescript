@@ -215,7 +215,6 @@ describe("fetchCountriesData function", () => {
       "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
 
     const result = await fetchAPIData<CountryData>(main, API_ENDPOINT);
-    console.log("result is", result);
 
     expect(result).toEqual(mockData);
   });
@@ -223,13 +222,18 @@ describe("fetchCountriesData function", () => {
     const mockRejectedValue = "Something went wrong";
     globalThis.fetch = jest
       .fn()
-      .mockRejectedValue(new Error("testing for unsuccessful data retrieval"));
+      .mockRejectedValue(
+        new Error(
+          "if this is displyed, test case has passed: testing for unsuccessful data retrieval"
+        )
+      );
     const main = document.createElement("div");
     const API_ENDPOINT =
       "https://restcountries.com/v3.1/all?fields=name,flags,population,capital,region";
 
     const result = await fetchAPIData<CountryData>(main, API_ENDPOINT);
 
+    expect(result).toBe(null);
     expect(main.textContent?.toLowerCase()).toContain(
       mockRejectedValue.toLowerCase()
     );

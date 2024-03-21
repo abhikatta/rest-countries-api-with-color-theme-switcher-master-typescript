@@ -7,9 +7,7 @@ interface CountryData {
   };
   capital: string[] | null;
   region: string;
-  languages: {
-    [key: string]: string;
-  };
+
   population: number;
   flags: {
     png: string;
@@ -33,6 +31,10 @@ interface DetailedData extends CountryData {
     };
   };
   tld: string[];
+  languages: {
+    [key: string]: string;
+  };
+
   subregion: string;
   borders: string[];
 }
