@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711085017414" clover="3.2.0">
-  <project timestamp="1711085017414" name="All files">
-    <metrics statements="42" coveredstatements="35" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="6" elements="57" coveredelements="48" complexity="0" loc="42" ncloc="42" packages="1" files="1" classes="1"/>
+<coverage generated="1711086274784" clover="3.2.0">
+  <project timestamp="1711086274784" name="All files">
+    <metrics statements="42" coveredstatements="39" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="7" elements="57" coveredelements="53" complexity="0" loc="42" ncloc="42" packages="1" files="1" classes="1"/>
     <file name="utils.ts" path="D:\ScaleReal\rest-countries-api-with-color-theme-switcher-master-typescript\src\utils.ts">
-      <metrics statements="42" coveredstatements="35" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="6"/>
+      <metrics statements="42" coveredstatements="39" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="7"/>
       <line num="3" count="3" type="stmt"/>
       <line num="5" count="0" type="stmt"/>
       <line num="6" count="0" type="stmt"/>
@@ -21,10 +21,10 @@
       <line num="27" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="28" count="2" type="stmt"/>
       <line num="31" count="3" type="stmt"/>
-      <line num="32" count="0" type="stmt"/>
-      <line num="33" count="0" type="stmt"/>
-      <line num="34" count="0" type="stmt"/>
-      <line num="35" count="0" type="stmt"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="33" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
       <line num="38" count="3" type="stmt"/>
       <line num="44" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="45" count="1" type="stmt"/>

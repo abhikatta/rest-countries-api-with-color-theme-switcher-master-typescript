@@ -64,13 +64,6 @@ describe("filter function", () => {
       countriesData,
       mockFunction
     );
-    console.log(filteredData.length);
-    if (filteredData.length !== 3) {
-      console.log(
-        "Received wrong array length, it is not 3:",
-        filteredData.length
-      );
-    }
     filteredData.map((country) => {
       expect(country.region.toLowerCase()).toBe("region1");
     });
@@ -85,13 +78,6 @@ describe("filter function", () => {
       countriesData,
       mockFunction
     );
-    console.log(filteredData.length);
-    if (filteredData.length !== 3) {
-      console.log(
-        "Received array length, it is not 3, its",
-        filteredData.length
-      );
-    }
     expect(filteredData).toBe(countriesData);
   });
 });
@@ -136,8 +122,6 @@ describe("search function", () => {
       countriesData,
       mockFunction
     );
-    console.log(data);
-
     expect(data).toBe(countriesData);
     expect(data).not.toBe(duplicateCountriesData);
   });
