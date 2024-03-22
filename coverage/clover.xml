@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711026012764" clover="3.2.0">
-  <project timestamp="1711026012764" name="All files">
+<coverage generated="1711085017414" clover="3.2.0">
+  <project timestamp="1711085017414" name="All files">
     <metrics statements="42" coveredstatements="35" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="6" elements="57" coveredelements="48" complexity="0" loc="42" ncloc="42" packages="1" files="1" classes="1"/>
     <file name="utils.ts" path="D:\ScaleReal\rest-countries-api-with-color-theme-switcher-master-typescript\src\utils.ts">
       <metrics statements="42" coveredstatements="35" conditionals="7" coveredconditionals="7" methods="8" coveredmethods="6"/>
@@ -28,7 +28,7 @@
       <line num="38" count="3" type="stmt"/>
       <line num="44" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="45" count="1" type="stmt"/>
-      <line num="46" count="6" type="stmt"/>
+      <line num="46" count="5" type="stmt"/>
       <line num="52" count="1" type="stmt"/>
       <line num="54" count="2" type="stmt"/>
       <line num="55" count="2" type="stmt"/>

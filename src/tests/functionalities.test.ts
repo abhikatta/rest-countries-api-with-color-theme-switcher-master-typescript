@@ -92,74 +92,12 @@ describe("filter function", () => {
         filteredData.length
       );
     }
-    expect(filteredData).toMatchObject(countriesData);
+    expect(filteredData).toBe(countriesData);
   });
 });
 
 describe("search function", () => {
   test("should search for country and return all countries that contain the substring", () => {
-    const duplicateCountriesData: CountryData[] = [
-      {
-        name: {
-          common: "Country1",
-          nativeName: { eng: { common: "Country1", official: "Country1" } },
-        },
-        capital: ["Capital1"],
-        region: "Region1",
-        population: 1000000,
-        flags: { png: "flag1.png", svg: "flag1.svg", alt: "Flag 1" },
-      },
-      {
-        name: {
-          common: "Country2",
-          nativeName: { eng: { common: "Country2", official: "Country2" } },
-        },
-        capital: ["Capital2"],
-        region: "Region1",
-        population: 1000000,
-        flags: { png: "flag2.png", svg: "flag2.svg", alt: "Flag 2" },
-      },
-      {
-        name: {
-          common: "Country3",
-          nativeName: { eng: { common: "Country3", official: "Country3" } },
-        },
-        capital: ["Capital3"],
-        region: "Region1",
-        population: 1000000,
-        flags: { png: "flag3.png", svg: "flag3.svg", alt: "Flag 3" },
-      },
-      {
-        name: {
-          common: "Country4",
-          nativeName: { eng: { common: "Country4", official: "Country4" } },
-        },
-        capital: ["Capital4"],
-        region: "Region2",
-        population: 1000000,
-        flags: { png: "flag4.png", svg: "flag4.svg", alt: "Flag 4" },
-      },
-      {
-        name: {
-          common: "Country2 and more",
-          nativeName: { eng: { common: "Country5", official: "Country5" } },
-        },
-        capital: ["Capital5"],
-        region: "Region3",
-        population: 1000000,
-        flags: { png: "flag5.png", svg: "flag5.svg", alt: "Flag 5" },
-      },
-      {
-        name: {
-          common: "Country5",
-          nativeName: { eng: { common: "Country5", official: "Country5" } },
-        },
-        capital: ["Capital5"],
-        region: "Region3",
-        population: 1000000,
-        flags: { png: "flag5.png", svg: "flag5.svg", alt: "Flag 5" },
-      },
-    ];
     const countriesData = [...duplicateCountriesData];
     const searchValue = "Country2";
     const mockFunction = jest.fn();
@@ -177,68 +115,6 @@ describe("search function", () => {
     });
   });
   test("should not search anything and return original array when null is passed", () => {
-    const duplicateCountriesData: CountryData[] = [
-      {
-        name: {
-          common: "Country1",
-          nativeName: { eng: { common: "Country1", official: "Country1" } },
-        },
-        capital: ["Capital1"],
-        region: "Region1",
-        population: 1000000,
-        flags: { png: "flag1.png", svg: "flag1.svg", alt: "Flag 1" },
-      },
-      {
-        name: {
-          common: "Country2",
-          nativeName: { eng: { common: "Country2", official: "Country2" } },
-        },
-        capital: ["Capital2"],
-        region: "Region1",
-        population: 1000000,
-        flags: { png: "flag2.png", svg: "flag2.svg", alt: "Flag 2" },
-      },
-      {
-        name: {
-          common: "Country3",
-          nativeName: { eng: { common: "Country3", official: "Country3" } },
-        },
-        capital: ["Capital3"],
-        region: "Region1",
-        population: 1000000,
-        flags: { png: "flag3.png", svg: "flag3.svg", alt: "Flag 3" },
-      },
-      {
-        name: {
-          common: "Country4",
-          nativeName: { eng: { common: "Country4", official: "Country4" } },
-        },
-        capital: ["Capital4"],
-        region: "Region2",
-        population: 1000000,
-        flags: { png: "flag4.png", svg: "flag4.svg", alt: "Flag 4" },
-      },
-      {
-        name: {
-          common: "Country2 and more",
-          nativeName: { eng: { common: "Country5", official: "Country5" } },
-        },
-        capital: ["Capital5"],
-        region: "Region3",
-        population: 1000000,
-        flags: { png: "flag5.png", svg: "flag5.svg", alt: "Flag 5" },
-      },
-      {
-        name: {
-          common: "Country5",
-          nativeName: { eng: { common: "Country5", official: "Country5" } },
-        },
-        capital: ["Capital5"],
-        region: "Region3",
-        population: 1000000,
-        flags: { png: "flag5.png", svg: "flag5.svg", alt: "Flag 5" },
-      },
-    ];
     const countriesData = [
       ...duplicateCountriesData,
       {
@@ -260,7 +136,9 @@ describe("search function", () => {
       countriesData,
       mockFunction
     );
-    expect(data).toMatchObject(countriesData);
-    expect(data).not.toMatchObject(duplicateCountriesData);
+    console.log(data);
+
+    expect(data).toBe(countriesData);
+    expect(data).not.toBe(duplicateCountriesData);
   });
 });
